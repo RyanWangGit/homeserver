@@ -20,4 +20,4 @@ This project contains many `Dockerfile`s in folders to build each individual app
 [Spigot](https://www.spigotmc.org/) 1.14 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins.
 
 ## License
-[MIT](https://github.com/RyanWangGit/homeserver/blob/master/LICENSE).
+[MIT](https://github.com/yxwangcs/homeserver/blob/master/LICENSE).
