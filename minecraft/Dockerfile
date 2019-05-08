@@ -49,3 +49,4 @@ RUN apt-get autoremove -y
 CMD ["sh", "/start_spigot.sh"]
 
 EXPOSE 25565
+VOLUME ["/config"]
