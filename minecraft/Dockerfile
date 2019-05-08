@@ -35,7 +35,7 @@ RUN cd /minecraft/plugin-sources && \
     cd WorldEdit && \
     ./gradlew build -Dorg.gradle.java.home=/usr/lib/jvm/java-8-openjdk-amd64 && \
     cd worldedit-bukkit/build/libs && \
-    mv worldedit-bukkit-7.0.0-SNAPSHOT.jar /minecraft/plugins
+    mv worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar /minecraft/plugins
 
 # remove source folder
 RUN rm -rf /minecraft/plugin-sources
