@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -z $EULA ]; then 
     echo "eula=$EULA" > /minecraft/eula.txt
