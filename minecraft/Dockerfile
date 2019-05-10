@@ -6,8 +6,7 @@ RUN apt-get install -y --no-install-recommends \
     git \
     maven \
     wget \
-    ca-certificates \
-    openjdk-8-jdk-headless
+    ca-certificates
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
@@ -18,11 +17,25 @@ RUN java -jar BuildTools.jar nogui --rev 1.14 && \
     rm -rf BuildData && \
     rm -f BuildTools.jar
 
-COPY ./build_plugins.sh /build_plugins.sh
+# install the plugins
 RUN mkdir /plugins
-RUN sh /build_plugins.sh
+RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.154.jar \
+    -O /plugins/EssentialsX-2.16.1.154.jar
 
-FROM openjdk:12-jdk-alpine3.9
+# then compile plugins that do not support 1.14 for pre-compiled version yet
+# mcMMO
+RUN mkdir /tmp/plugin-sources && cd /tmp/plugin-sources && \
+    git clone https://github.com/mcMMO-Dev/mcMMO.git && \
+    cd mcMMO && \
+    mvn clean install && \
+    mv target/mcMMO.jar /plugins/
+
+# WorldEdit
+RUN wget http://builds.enginehub.org/job/worldedit/11630/download/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar \
+    -O /plugins/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar
+
+# create new slim image to store the compiled files
+FROM openjdk:11-jre-slim
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
 
