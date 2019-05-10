@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  minecraft:
+    build: ./minecraft
+    network_mode: host
+    container_name: minecraft-spigot
+    volumes:
+      - /config/minecraft:/config
+    environment:
+      - EULA=true
+    restart: always
