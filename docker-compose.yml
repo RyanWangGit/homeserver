@@ -8,4 +8,4 @@ services:
       - /config/minecraft:/config
     environment:
       - EULA=true
-    restart: always
+    restart: unless-stopped
