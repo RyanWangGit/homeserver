@@ -26,7 +26,7 @@ ln -s /config/whitelist.json /minecraft/whitelist.json
 ln -s /config/wepif.yml /minecraft/wepif.yml
 
 # start the spigot server
-java -Xmx2048M -Xms2048M -jar /minecraft/spigot-1.14.jar nogui \
+java -Xmx512M -Xms2048M -jar /minecraft/spigot-1.14.jar nogui \
     -c /config/server.properties \
     -b /config/bukkit.yml \
     -S /config/spigot.yml \
