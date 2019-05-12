@@ -19,7 +19,7 @@ RUN java -jar BuildTools.jar nogui --rev 1.14 && \
 
 # install the plugins
 RUN mkdir /plugins
-RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.154.jar \
+RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.155.jar \
     -O /plugins/EssentialsX-2.16.1.154.jar
 
 # then compile plugins that do not support 1.14 for pre-compiled version yet
