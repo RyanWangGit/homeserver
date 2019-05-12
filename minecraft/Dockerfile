@@ -39,10 +39,21 @@ FROM openjdk:11-jre-slim
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
 
+# add tini
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
+    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
+    dpkg -i tini.deb && \
+    rm tini.deb && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /minecraft
 COPY ./start_spigot.sh /start_spigot.sh
 
-CMD ["sh", "/start_spigot.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
+CMD ["bash", "/start_spigot.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]

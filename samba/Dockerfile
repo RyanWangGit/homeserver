@@ -6,4 +6,6 @@ RUN apk add --update samba tini && \
 
 COPY ./start_samba.sh /start_samba.sh
 
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
 CMD ["sh", "start_samba.sh"]
