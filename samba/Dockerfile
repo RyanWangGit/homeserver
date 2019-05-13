@@ -16,7 +16,7 @@ RUN echo "[share]" >> /etc/samba/smb.conf && \
     echo "   read only = yes" >> /etc/samba/smb.conf && \
     echo "   only guest = yes" >> /etc/samba/smb.conf
 
-RUN for i in /etc/avahi/services/*; do mv $i /etc/avahi/${i}.backup; done   
+RUN rm /etc/avahi/services/*   
 COPY smb.service /etc/avahi/services/smb.service
 
 ENTRYPOINT ["tini", "--"]
