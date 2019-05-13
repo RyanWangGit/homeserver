@@ -16,3 +16,7 @@ RUN echo "[share]" >> /etc/samba/smb.conf && \
 
 ENTRYPOINT ["tini", "--", "sh", "start_samba.sh"]
 
+VOLUME ["/config", "/share"]
+
+# 137, 138 for nmbd and 139, 445 for smbd
+EXPOSE 135/tcp 137/udp 138/udp 139/tcp 445/tcp
