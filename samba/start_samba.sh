@@ -11,7 +11,7 @@ fi
 
 mkdir -p /usr/local/samba
 mkdir -p /usr/local/samba/var/
-ln -s /logs /usr/local/samba/var/
+ln -s /usr/local/samba/var /logs
 
 # start samba daemon and netbios daemon
 smbd && nmbd
