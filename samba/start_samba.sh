@@ -14,5 +14,6 @@ mkdir -p /usr/local/samba/var/
 ln -s /usr/local/samba/var /logs
 
 # start samba daemon and avahi daemon
-smbd && avahi-daemon
-tail -F /logs/log.smbd
+smbd
+avahi-daemon 2> /logs/log.avahid
+tail -F /logs/log.smbd /logs/log.avahid
