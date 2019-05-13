@@ -15,5 +15,5 @@ ln -s /usr/local/samba/var /logs
 
 # start samba daemon and avahi daemon
 smbd
-avahi-daemon & 2> /logs/log.avahid
+nohup avahi-daemon & 2> /logs/log.avahid
 tail -f /logs/log.smbd /logs/log.avahid
