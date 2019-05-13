@@ -51,7 +51,9 @@ RUN apt-get update && \
 WORKDIR /minecraft
 COPY ./start_spigot.sh /start_spigot.sh
 
-ENTRYPOINT ["/usr/bin/tini", "--", "bash", "/start_spigot.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
+CMD ["bash", "/start_spigot.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]
