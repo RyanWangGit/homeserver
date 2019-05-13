@@ -9,3 +9,11 @@ services:
     environment:
       - EULA=true
     restart: unless-stopped
+  
+  samba:
+    build: ./samba
+    network_mode: host
+    container_name: samba
+    volumes:
+      - /config/samba:/config
+    restart: unless-stopped
