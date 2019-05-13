@@ -11,6 +11,7 @@ fi
 
 mkdir -p /usr/local/samba
 mkdir -p /usr/local/samba/var/
+ln -s /logs /usr/local/samba/var/
 
 smbd
-tail -F /usr/local/samba/var/log.smbd
+tail -F /logs/log.smbd

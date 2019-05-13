@@ -20,8 +20,7 @@ mv /plugins/*.jar /config/plugins/
 mkdir -p /config/world
 
 # symlinks the config files that cannot be specified from command line to spigot
-mkdir -p /minecraft/logs
-ln -s /config/latest.log /minecraft/logs/latest.log
+ln -s /logs /minecraft/logs/latest.log
 ln -s /config/ops.json /minecraft/ops.json
 ln -s /config/permissions.yml /minecraft/permissions.yml
 ln -s /config/whitelist.json /minecraft/whitelist.json
