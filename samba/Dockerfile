@@ -16,7 +16,7 @@ RUN echo "[share]" >> /etc/samba/smb.conf && \
     echo "   read only = yes" >> /etc/samba/smb.conf && \
     echo "   only guest = yes" >> /etc/samba/smb.conf
 
-COPY smb.services /etc/avahi/services/smb.services
+COPY smb.service /etc/avahi/services/smb.service
 
 ENTRYPOINT ["tini", "--"]
 CMD ["sh", "start_samba.sh"]
