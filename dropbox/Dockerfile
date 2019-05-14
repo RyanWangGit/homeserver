@@ -16,8 +16,6 @@ RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python opens
 
 USER dropbox
 
-RUN ln -s /config/.dropbox /dropbox/.dropbox
-
 WORKDIR /dropbox/Dropbox
 
 EXPOSE 17500
