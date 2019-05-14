@@ -12,6 +12,7 @@ RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python opens
     wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - && \
     chmod +x /usr/local/bin/dropbox-cli && \
     chown dropbox:dropbox /usr/local/bin/dropbox-cli && \
+    chown -R dropbox:dropbox /dropbox && \
     echo "Installed Dropbox version:" $(cat /dropbox/.dropbox-dist/VERSION)
 
 USER dropbox
