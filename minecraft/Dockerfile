@@ -57,7 +57,7 @@ RUN mkdir -p /config && \
 
 # add tini
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
+    apt-get install -y --no-install-recommends curl setpriv && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
@@ -68,7 +68,7 @@ WORKDIR /minecraft
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["chroot", "--userspec=minecraft", "/", "bash", "/start_spigot.sh"]
+CMD ["setpriv", "--reuid=minecraft", "--regid=minecraft", "--clear-groups", "bash", "/start_spigot.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]
