@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk-slim AS builder
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
     software-properties-common \
     git \
     maven \
