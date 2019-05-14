@@ -44,5 +44,5 @@ services:
     build: ./dropbox
     container_name: dropbox
     volumes:
-      - /config:/dropbox/Dropbox
+      - /config:/dropbox/Dropbox:ro
     restart: unless-stopped
