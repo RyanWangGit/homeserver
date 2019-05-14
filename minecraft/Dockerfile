@@ -46,14 +46,10 @@ RUN groupadd -f -g ${PGID:-1000} minecraft && \
 
 # change the permissions of the files we will use
 RUN mkdir -p /config && \
-    chown minecraft /config && \
-    chgrp minecraft /config && \
-    chown -R minecraft /minecraft && \
-    chgrp -R minecraft /minecraft && \
-    chown -R minecraft /plugins && \
-    chgrp -R minecraft /plugins && \
-    chown minecraft /start_spigot.sh && \
-    chgrp minecraft /start_spigot.sh
+    chown minecraft:minecraft /config && \
+    chown -R minecraft:minecraft /minecraft && \
+    chown -R minecraft:minecraft /plugins && \
+    chown minecraft:minecraft /start_spigot.sh
 
 # add tini
 RUN apt-get update && \
