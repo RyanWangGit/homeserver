@@ -41,7 +41,7 @@ COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
 
 # create a normal user
-COPY groupadd -f -g ${PGID:-1000} minecraft && \
+RUN groupadd -f -g ${PGID:-1000} minecraft && \
     useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false minecraft
 
 # add tini
