@@ -38,6 +38,7 @@ RUN wget http://builds.enginehub.org/job/worldedit/11630/download/worldedit-bukk
 FROM openjdk:11-jre-slim
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
+COPY ./start_spigot.sh /start_spigot.sh
 
 # create a normal user
 RUN groupadd -f -g ${PGID:-1000} minecraft && \
@@ -50,7 +51,9 @@ RUN mkdir -p /config && \
     chown -R minecraft /minecraft && \
     chgrp -R minecraft /minecraft && \
     chown -R minecraft /plugins && \
-    chgrp -R minecraft /plugins
+    chgrp -R minecraft /plugins && \
+    chown minecraft /start_spigot.sh && \
+    chgrp minecraft /start_spigot.sh
 
 # add tini
 RUN apt-get update && \
@@ -62,7 +65,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /minecraft
-COPY ./start_spigot.sh /start_spigot.sh
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
