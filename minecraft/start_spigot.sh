@@ -26,7 +26,12 @@ ln -s /config/permissions.yml /minecraft/permissions.yml
 ln -s /config/whitelist.json /minecraft/whitelist.json
 ln -s /config/wepif.yml /minecraft/wepif.yml
 
-# start the spigot server
+# change the permission
+sudo chown -R minecraft /config
+sudo chgrp -R minecraft /config
+
+# start the spigot server using user `minecraft`
+sudo -u minecraft \
 java -Xmx2048M -Xms512M -jar /minecraft/spigot-1.14.jar nogui \
     --noconsole \
     -c /config/server.properties \

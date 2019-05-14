@@ -6,7 +6,8 @@ RUN apt-get install -y --no-install-recommends \
     git \
     maven \
     wget \
-    ca-certificates
+    ca-certificates \
+    sudo
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
@@ -38,6 +39,10 @@ RUN wget http://builds.enginehub.org/job/worldedit/11630/download/worldedit-bukk
 FROM openjdk:11-jre-slim
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
+
+# create a normal user
+COPY groupadd -f -g ${PGID:-1000} minecraft && \
+    useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false minecraft
 
 # add tini
 RUN apt-get update && \
