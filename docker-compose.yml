@@ -30,3 +30,11 @@ services:
       - PUID=1000
       - PGID=1000
     restart: unless-stopped
+  
+  nginx:
+    build: ./nginx
+    network_mode: host
+    container_name: nginx
+    volumes:
+      - /config/nginx:/config
+    restart: unless-stopped
