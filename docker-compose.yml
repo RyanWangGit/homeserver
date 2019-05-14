@@ -16,7 +16,7 @@ services:
     container_name: samba
     volumes:
       - /config/samba:/config
-      - /mnt/usb/media:/share
+      - /mnt/usb/media:/share:ro
     restart: unless-stopped
 
   transmission:
