@@ -1,8 +1,11 @@
 FROM alpine:edge
 
 RUN apk upgrade --no-cache && \
-    apk add --update --no-cache samba avahi tini && \
+    apk add --update --no-cache samba avahi tini su-exec && \
     rm -rf /var/cache/apk/*
+
+RUN addgroup -g ${PGID:-1000} nginx && \
+    adduser -s /bin/false -G nginx -D -H -u ${PUID:-1000} nginx
 
 COPY ./start_samba.sh /start_samba.sh
 
@@ -24,5 +27,5 @@ CMD ["sh", "start_samba.sh"]
 
 VOLUME ["/config", "/share"]
 
-# 137, 138 for nmbd and 5353 for avahi
-EXPOSE 135/tcp 137/udp 138/udp 5353/udp
+# 445 for smbd and 5353 for avahi
+EXPOSE 445/tcp 5353/udp
