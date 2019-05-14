@@ -39,3 +39,10 @@ services:
     volumes:
       - /config/nginx:/config
     restart: unless-stopped
+
+  dropbox:
+    build: ./dropbox
+    container_name: dropbox
+    volumes:
+      - /config:/dropbox/Dropbox
+    restart: unless-stopped
