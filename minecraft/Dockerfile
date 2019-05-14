@@ -43,6 +43,15 @@ COPY --from=builder /plugins /plugins
 RUN groupadd -f -g ${PGID:-1000} minecraft && \
     useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false minecraft
 
+# change the permissions of the files we will use
+RUN mkdir -p /config && \
+    chown minecraft /config && \
+    chgrp minecraft /config && \
+    chown -R minecraft /minecraft && \
+    chgrp -R minecraft /minecraft && \
+    chown -R minecraft /plugins && \
+    chgrp -R minecraft /plugins
+
 # add tini
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl sudo && \
@@ -57,7 +66,7 @@ COPY ./start_spigot.sh /start_spigot.sh
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["bash", "/start_spigot.sh"]
+CMD ["sudo", "-u", "minecraft", "bash", "/start_spigot.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]
