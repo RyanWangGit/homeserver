@@ -11,4 +11,4 @@ if [ -d "/config" ]; then
 fi
 
 # start nginx
-nginx -g daemon off;
+nginx -g "daemon off;"
