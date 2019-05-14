@@ -3,7 +3,7 @@ services:
   minecraft:
     build: ./minecraft
     network_mode: host
-    container_name: minecraft-spigot
+    container_name: minecraft
     volumes:
       - /config/minecraft:/config
     environment:
@@ -17,4 +17,16 @@ services:
     volumes:
       - /config/samba:/config
       - /mnt/usb/media:/share
+    restart: unless-stopped
+
+  transmission:
+    image: linuxserver/transmission
+    network_mode: host
+    container_name: transmission
+    volumes:
+      - /config/transmission:/config
+      - /mnt/usb/media:/downloads
+    environment:
+      - PUID=1000
+      - PGID=1000
     restart: unless-stopped
