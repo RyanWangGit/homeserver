@@ -6,8 +6,7 @@ RUN apt-get install -y --no-install-recommends \
     git \
     maven \
     wget \
-    ca-certificates \
-    sudo
+    ca-certificates
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
@@ -46,7 +45,7 @@ RUN groupadd -f -g ${PGID:-1000} minecraft && \
 
 # add tini
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
+    apt-get install -y --no-install-recommends curl sudo && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
