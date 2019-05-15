@@ -44,7 +44,7 @@ services:
     image: pfidr/rclone
     container_name: rclone
     environment:
-      - SYNC_SRC=/config
+      - SYNC_SRC=/source
       - SYNC_DEST=remote:hoemserver
       - CRON="0 3 * * *"
       - FORCE_SYNC=1
