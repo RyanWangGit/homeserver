@@ -2,7 +2,7 @@ FROM frolvlad/alpine-glibc
 
 USER root
 
-RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python openssl tini && \
+RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python3 openssl tini && \
     wget https://www.dropbox.com/download?dl=packages/dropbox.py -O /usr/local/bin/dropbox-cli && \
     addgroup -g ${PGID:-1000} dropbox && \
     adduser -s /bin/false -G dropbox -D -h /dropbox -u ${PUID:-1000} dropbox && \
