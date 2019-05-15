@@ -19,10 +19,15 @@ USER dropbox
 
 WORKDIR /dropbox/Dropbox
 
+ADD check_status.sh /dropbox/check_status.sh
+ADD start_dropbox.sh /dropbox/start_dropbox.sh
+RUN chmod +x /dropbox/check_status.sh && \
+    chmod +x /dropbox/start_dropbox.sh
+
 EXPOSE 17500
 
 VOLUME ["/dropbox/Dropbox"]
 
 ENTRYPOINT ["tini", "--"]
 
-CMD ["/dropbox/.dropbox-dist/dropboxd"]
+CMD ["/dropbox/start_dropbox.sh"]
