@@ -2,6 +2,11 @@ FROM frolvlad/alpine-glibc
 
 USER root
 
+ADD check_status.sh /dropbox/check_status.sh
+ADD start_dropbox.sh /dropbox/start_dropbox.sh
+RUN chmod +x /dropbox/check_status.sh && \
+    chmod +x /dropbox/start_dropbox.sh
+
 RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python3 openssl tini && \
     wget https://www.dropbox.com/download?dl=packages/dropbox.py -O /usr/local/bin/dropbox-cli && \
     addgroup -g ${PGID:-1000} dropbox && \
@@ -18,11 +23,6 @@ RUN apk add --update --no-cache ca-certificates wget glib libstdc++ python3 open
 USER dropbox
 
 WORKDIR /dropbox/Dropbox
-
-ADD check_status.sh /dropbox/check_status.sh
-ADD start_dropbox.sh /dropbox/start_dropbox.sh
-RUN chmod +x /dropbox/check_status.sh && \
-    chmod +x /dropbox/start_dropbox.sh
 
 EXPOSE 17500
 
