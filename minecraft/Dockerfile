@@ -13,14 +13,14 @@ WORKDIR /minecraft
 
 # first build spigot 1.14
 RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-RUN java -jar BuildTools.jar nogui --rev 1.14 && \
+RUN java -jar BuildTools.jar nogui --rev 1.14.1 && \
     rm -rf BuildData && \
     rm -f BuildTools.jar
 
 # install the plugins
 RUN mkdir /plugins
-RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.155.jar \
-    -O /plugins/EssentialsX-2.16.1.154.jar
+RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.156.jar \
+    -O /plugins/EssentialsX-2.16.1.156.jar
 
 # then compile plugins that do not support 1.14 for pre-compiled version yet
 # mcMMO
