@@ -11,7 +11,7 @@ I'm using [mergerfs](https://github.com/trapexit/mergerfs) to group together a b
 This project contains many `Dockerfile`s in folders to build each individual application that I personally run on my homeserver.
 
 ### Transmission
-Uses [`linuxserver/transmission`](https://hub.docker.com/r/linuxserver/transmission), see https://github.com/yxwangcs/homeserver/blob/master/docker-compose.yml#L22-L33 for the configurations.
+Uses [`linuxserver/transmission`](https://hub.docker.com/r/linuxserver/transmission), see [docker-compose.yml](https://github.com/yxwangcs/homeserver/blob/master/docker-compose.yml#L22-L33) for the configurations.
 
 ### Nginx
 Uses [`linuxserver/nginx`](https://hub.docker.com/r/linuxserver/nginx), this is set up mainly for transmission `rpc` and `web` services, since it uses plain http without encryption. This container sets up a SSL proxy for it, but uses a self-signed certificate.
