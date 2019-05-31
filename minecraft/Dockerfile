@@ -13,7 +13,7 @@ WORKDIR /minecraft
 
 # first build spigot 1.14
 RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-RUN java -jar BuildTools.jar nogui --rev 1.14.1 && \
+RUN java -jar BuildTools.jar nogui --rev 1.14.2 && \
     rm -rf BuildData && \
     rm -f BuildTools.jar
 
