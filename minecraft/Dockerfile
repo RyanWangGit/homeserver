@@ -19,8 +19,9 @@ RUN java -jar BuildTools.jar nogui --rev 1.14.2 && \
 
 # install the plugins
 RUN mkdir /plugins
-RUN wget https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/EssentialsX-2.16.1.156.jar \
-    -O /plugins/EssentialsX-2.16.1.156.jar
+RUN ESSENTIALSX_JAR=`curl -s https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/ | grep -o "EssentialsX-[0-9.]*\.jar" | head -n1` && \
+    wget "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/${ESSENTIALSX_JAR}" \
+    -O "/plugins/${ESSENTIALSX_JAR}"
 
 # then compile plugins that do not support 1.14 for pre-compiled version yet
 # mcMMO
