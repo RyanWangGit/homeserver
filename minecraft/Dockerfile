@@ -6,6 +6,7 @@ RUN apt-get update -y && \
     git \
     maven \
     wget \
+    curl \
     ca-certificates
 
 RUN mkdir /minecraft
