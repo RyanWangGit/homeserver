@@ -2,7 +2,6 @@ FROM openjdk:11-jdk-slim AS builder
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    software-properties-common \
     git \
     maven \
     wget \
@@ -24,13 +23,9 @@ RUN ESSENTIALSX_JAR=`curl -s https://ci.ender.zone/job/EssentialsX/lastSuccessfu
     wget "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/${ESSENTIALSX_JAR}" \
     -O "/plugins/${ESSENTIALSX_JAR}"
 
-# then compile plugins that do not support 1.14 for pre-compiled version yet
 # mcMMO
-RUN mkdir /tmp/plugin-sources && cd /tmp/plugin-sources && \
-    git clone https://github.com/mcMMO-Dev/mcMMO.git && \
-    cd mcMMO && \
-    mvn clean install && \
-    mv target/mcMMO.jar /plugins/
+RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mcMMO/target/mcMMO.jar \
+    -O /plugins/mcMMO.jar
 
 # WorldEdit
 RUN wget https://media.forgecdn.net/files/2711/407/worldedit-bukkit-7.0.0-rc-2.jar \
