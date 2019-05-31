@@ -32,8 +32,8 @@ RUN mkdir /tmp/plugin-sources && cd /tmp/plugin-sources && \
     mv target/mcMMO.jar /plugins/
 
 # WorldEdit
-RUN wget http://builds.enginehub.org/job/worldedit/11630/download/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar \
-    -O /plugins/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar
+RUN wget https://media.forgecdn.net/files/2711/407/worldedit-bukkit-7.0.0-rc-2.jar \
+    -O /plugins/worldedit-bukkit-7.0.0-rc-2.jar
 
 # create new slim image to store the compiled files
 FROM openjdk:11-jre-slim
