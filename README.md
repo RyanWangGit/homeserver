@@ -23,7 +23,7 @@ Build upon `alpine:edge` image and includes `avahi` to broadcast samba service (
 Uses [`pfidr/rclone`](https://hub.docker.com/r/pfidr/rclone/) image, see [docker-compose.yml](https://github.com/yxwangcs/homeserver/blob/master/docker-compose.yml#L43-L56) for detailed settings. Note that the config is mapped to `/rclone` in host machine and the backup folder (`/config` in host -> `/source` in container) is given read only permission.
 
 ### Minecraft
-[Spigot](https://www.spigotmc.org/) 1.14.1 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins. It puts all config and world files in to external `/config` folder.
+[Spigot](https://www.spigotmc.org/) 1.14.2 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins. It puts all config and world files in to external `/config` folder.
 
 ## License
 [MIT](https://github.com/yxwangcs/homeserver/blob/master/LICENSE).
