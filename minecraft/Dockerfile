@@ -60,7 +60,7 @@ WORKDIR /minecraft
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["setpriv", "--reuid=minecraft", "--regid=minecraft", "--clear-groups", "bash", "/start_spigot.sh"]
+CMD ["setpriv", "--reuid=minecraft", "--regid=minecraft", "--clear-groups", "bash", "/start.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]
