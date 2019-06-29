@@ -30,7 +30,7 @@ ln -s /config/whitelist.json /minecraft/whitelist.json
 ln -s /config/wepif.yml /minecraft/wepif.yml
 
 # start the spigot server using user `minecraft`
-java -Xmx2048M -Xms512M -jar /minecraft/spigot-1.14.2.jar nogui \
+java -Xmx2048M -Xms512M -jar /minecraft/spigot-1.14.3.jar nogui \
     --noconsole \
     -c /config/server.properties \
     -b /config/bukkit.yml \

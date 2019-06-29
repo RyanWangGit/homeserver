@@ -12,7 +12,7 @@ WORKDIR /minecraft
 
 # first build spigot 1.14
 RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-RUN java -jar BuildTools.jar nogui --rev 1.14.2 && \
+RUN java -jar BuildTools.jar nogui --rev 1.14.3 && \
     rm -rf BuildData && \
     rm -f BuildTools.jar
 
@@ -27,8 +27,8 @@ RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mc
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN wget https://media.forgecdn.net/files/2711/407/worldedit-bukkit-7.0.0-rc-2.jar \
-    -O /plugins/worldedit-bukkit-7.0.0-rc-2.jar
+RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
+    -O /plugins/worldedit-bukkit-7.0.0.jar
 
 # create new slim image to store the compiled files
 FROM openjdk:11-jre-slim
