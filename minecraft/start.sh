@@ -29,12 +29,13 @@ ln -s /config/permissions.yml /minecraft/permissions.yml
 ln -s /config/whitelist.json /minecraft/whitelist.json
 ln -s /config/wepif.yml /minecraft/wepif.yml
 
-# start the spigot server using user `minecraft`
-java -Xmx2048M -Xms512M -jar /minecraft/spigot-1.14.3.jar nogui \
+# start the paper server using user `minecraft`
+java -Xmx2048M -Xms512M -jar /minecraft/paperclip.jar nogui \
     --noconsole \
     -c /config/server.properties \
     -b /config/bukkit.yml \
     -S /config/spigot.yml \
+    --paper /config/paper.yml \
     -C /config/commands.yml \
     -W /config/world \
     -P /config/plugins

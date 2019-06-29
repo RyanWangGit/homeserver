@@ -10,11 +10,8 @@ RUN apt-get update -y && \
 RUN mkdir /minecraft
 WORKDIR /minecraft
 
-# first build spigot 1.14
-RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-RUN java -jar BuildTools.jar nogui --rev 1.14.3 && \
-    rm -rf BuildData && \
-    rm -f BuildTools.jar
+# download paper server jar
+RUN wget https://papermc.io/ci/job/Paper-1.14/lastSuccessfulBuild/artifact/paperclip.jar
 
 # install the plugins
 RUN mkdir /plugins
@@ -34,7 +31,7 @@ RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
 FROM openjdk:11-jre-slim
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
-COPY ./start_spigot.sh /start_spigot.sh
+COPY ./start.sh /start.sh
 
 # create a normal user
 RUN groupadd -f -g ${PGID:-1000} minecraft && \
@@ -45,7 +42,7 @@ RUN mkdir -p /config && \
     chown minecraft:minecraft /config && \
     chown -R minecraft:minecraft /minecraft && \
     chown -R minecraft:minecraft /plugins && \
-    chown minecraft:minecraft /start_spigot.sh
+    chown minecraft:minecraft /start.sh
 
 # add tini
 RUN apt-get update && \
