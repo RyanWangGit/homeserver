@@ -13,8 +13,8 @@ rm -f /config/plugins/EssentialsX-*.jar
 rm -f /config/plugins/mcMMO*.jar
 rm -f /config/plugins/worldedit-bukkit-*.jar
 
-# move compiled plugins
-mv /plugins/*.jar /config/plugins/
+# copy compiled plugins
+cp /plugins/*.jar /config/plugins/
 
 # create world folder if not present
 mkdir -p /config/world
