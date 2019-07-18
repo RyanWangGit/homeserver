@@ -1,14 +1,18 @@
-FROM openjdk:11-jdk-slim AS builder
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
-    git \
-    wget \
-    curl \
-    ca-certificates
+FROM openjdk:11-jre-slim
+COPY ./start.sh /start.sh
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
+
+# add tini
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl util-linux git wget ca-certificates && \
+    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
+    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
+    dpkg -i tini.deb && \
+    rm tini.deb && \
+    rm -rf /var/lib/apt/lists/*
 
 # download paper server jar
 RUN wget https://papermc.io/ci/job/Paper-1.14/lastSuccessfulBuild/artifact/paperclip.jar
@@ -27,12 +31,6 @@ RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mc
 RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
     -O /plugins/worldedit-bukkit-7.0.0.jar
 
-# create new slim image to store the compiled files
-FROM openjdk:11-jre-slim
-COPY --from=builder /minecraft /minecraft
-COPY --from=builder /plugins /plugins
-COPY ./start.sh /start.sh
-
 # create a normal user
 RUN groupadd -f -g ${PGID:-1000} minecraft && \
     useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false minecraft
@@ -43,15 +41,6 @@ RUN mkdir -p /config && \
     chown -R minecraft:minecraft /minecraft && \
     chown -R minecraft:minecraft /plugins && \
     chown minecraft:minecraft /start.sh
-
-# add tini
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl util-linux && \
-    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
-    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
-    dpkg -i tini.deb && \
-    rm tini.deb && \
-    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /minecraft
 
