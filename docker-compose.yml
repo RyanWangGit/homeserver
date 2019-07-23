@@ -8,6 +8,8 @@ services:
       - /config/minecraft:/config
     environment:
       - EULA=true
+      - PUID=1000
+      - PGID=1000
     restart: unless-stopped
   
   samba:
