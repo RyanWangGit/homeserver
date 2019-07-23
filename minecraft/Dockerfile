@@ -32,8 +32,8 @@ RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
     -O /plugins/worldedit-bukkit-7.0.0.jar
 
 # create a normal user
-RUN groupadd -f -g ${PGID:-1000} minecraft && \
-    useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false minecraft
+RUN groupadd -f -g 1000 minecraft && \
+    useradd -g 1000 -M -u 1000 -s /bin/false minecraft
 
 # change the permissions of the files we will use
 RUN mkdir -p /config && \
