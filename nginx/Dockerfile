@@ -6,8 +6,8 @@ RUN apk add --update --no-cache tini su-exec && \
 RUN addgroup -g 1000 abc && \
     adduser -s /bin/false -G abc -D -H -u 1000 abc
 
-COPY ./start_nginx.sh /start_nginx.sh
+COPY ./start.sh /start.sh
 
 ENTRYPOINT ["tini", "--"]
 
-CMD ["sh", "/start_nginx.sh"]
+CMD ["sh", "/start.sh"]

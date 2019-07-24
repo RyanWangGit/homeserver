@@ -23,7 +23,7 @@ RUN rm /etc/avahi/services/*
 COPY smb.service /etc/avahi/services/smb.service
 
 ENTRYPOINT ["tini", "--"]
-CMD ["sh", "start_samba.sh"]
+CMD ["sh", "start.sh"]
 
 VOLUME ["/config", "/share"]
 
