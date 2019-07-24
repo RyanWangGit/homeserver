@@ -32,10 +32,6 @@ RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mc
 RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
     -O /plugins/worldedit-bukkit-7.0.0.jar
 
-# create a normal user
-RUN groupadd -f -g 1000 abc && \
-    useradd -g 1000 -M -u 1000 -s /bin/false abc
-
 WORKDIR /minecraft
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
