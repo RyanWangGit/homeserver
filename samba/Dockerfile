@@ -4,7 +4,7 @@ RUN apk upgrade --no-cache && \
     apk add --update --no-cache samba avahi tini su-exec && \
     rm -rf /var/cache/apk/*
 
-COPY ./start_samba.sh /start_samba.sh
+COPY ./start.sh /start.sh
 
 RUN sed -i "s/workgroup = MYGROUP/workgroup = WORKGROUP/g" /etc/samba/smb.conf && \
     sed -i "s/server string = Samba Server/server string = Homeserver Samba/g" /etc/samba/smb.conf && \
