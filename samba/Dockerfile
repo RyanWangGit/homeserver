@@ -4,8 +4,8 @@ RUN apk upgrade --no-cache && \
     apk add --update --no-cache samba avahi tini su-exec && \
     rm -rf /var/cache/apk/*
 
-RUN addgroup -g 1000 samba && \
-    adduser -s /bin/false -G samba -D -H -u 1000 samba
+RUN addgroup -g 1000 abc && \
+    adduser -s /bin/false -G abc -D -H -u 1000 abc
 
 COPY ./start_samba.sh /start_samba.sh
 

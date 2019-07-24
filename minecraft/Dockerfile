@@ -32,21 +32,21 @@ RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
     -O /plugins/worldedit-bukkit-7.0.0.jar
 
 # create a normal user
-RUN groupadd -f -g 1000 minecraft && \
-    useradd -g 1000 -M -u 1000 -s /bin/false minecraft
+RUN groupadd -f -g 1000 abc && \
+    useradd -g 1000 -M -u 1000 -s /bin/false abc
 
 # change the permissions of the files we will use
 RUN mkdir -p /config && \
-    chown minecraft:minecraft /config && \
-    chown -R minecraft:minecraft /minecraft && \
-    chown -R minecraft:minecraft /plugins && \
-    chown minecraft:minecraft /start.sh
+    chown abc:abc /config && \
+    chown -R abc:abc /minecraft && \
+    chown -R abc:abc /plugins && \
+    chown abc:abc /start.sh
 
 WORKDIR /minecraft
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["setpriv", "--reuid=minecraft", "--regid=minecraft", "--clear-groups", "bash", "/start.sh"]
+CMD ["setpriv", "--reuid=abc", "--regid=abc", "--clear-groups", "bash", "/start.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]

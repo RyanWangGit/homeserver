@@ -6,7 +6,7 @@ if [ -d "/config" ]; then
         rm -f /etc/nginx/nginx.conf
         ln -s /config/nginx.conf /etc/nginx/nginx.conf
     else
-        su-exec normal:normal cp /etc/nginx/nginx.conf /config/nginx.conf
+        su-exec abc:abc cp /etc/nginx/nginx.conf /config/nginx.conf
     fi
 fi
 
