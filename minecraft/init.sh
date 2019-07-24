@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # add a non-priviledged user
-groupadd -f -g {$PGID:-1000} abc
-useradd -g {$PGID:-1000} -M -u {$PUID:-1000} -s /bin/false abc
+groupadd -f -g ${PGID:-1000} abc
+useradd -g ${PGID:-1000} -M -u ${PUID:-1000} -s /bin/false abc
 
 # change the permissions of the files we will use
 mkdir -p /config
