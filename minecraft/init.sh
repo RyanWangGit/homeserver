@@ -11,4 +11,4 @@ chown -R abc:abc /minecraft
 chown -R abc:abc /plugins
 chown abc:abc /start.sh
 
-setpriv --reuid=abc --regid=abc --clear-groups /start.sh
+setpriv --reuid=abc --regid=abc --clear-groups /bin/sh /start.sh

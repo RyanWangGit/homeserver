@@ -36,7 +36,7 @@ WORKDIR /minecraft
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["/init.sh"]
+CMD ["/bin/sh", "/init.sh"]
 
 EXPOSE 25565
 VOLUME ["/config"]
