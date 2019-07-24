@@ -14,7 +14,8 @@ RUN echo "[share]" >> /etc/samba/smb.conf && \
     echo "   path = /share" >> /etc/samba/smb.conf && \
     echo "   public = yes" >> /etc/samba/smb.conf && \
     echo "   read only = yes" >> /etc/samba/smb.conf && \
-    echo "   only guest = yes" >> /etc/samba/smb.conf
+    echo "   only guest = yes" >> /etc/samba/smb.conf && \
+    echo "   guest account = abc" >> /etc/samba/smb.conf
 
 RUN rm /etc/avahi/services/*   
 COPY smb.service /etc/avahi/services/smb.service
