@@ -1,9 +1,12 @@
 #!/bin/sh
 
+addgroup -g ${PGID:-1000} abc && \
+adduser -s /bin/false -G abc -D -H -u ${PUID:-1000} abc
+
 # create correct symlink if external config is given
 if [ -d /config ]; then
     if [ ! -f /config/smb.conf ]; then
-        su-exec samba:samba cp /etc/samba/smb.conf /config/smb.conf
+        su-exec abc:abc cp /etc/samba/smb.conf /config/smb.conf
     fi
     rm /etc/samba/smb.conf
     ln -s /config/smb.conf /etc/samba/smb.conf

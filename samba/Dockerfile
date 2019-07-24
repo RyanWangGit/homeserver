@@ -4,9 +4,6 @@ RUN apk upgrade --no-cache && \
     apk add --update --no-cache samba avahi tini su-exec && \
     rm -rf /var/cache/apk/*
 
-RUN addgroup -g 1000 abc && \
-    adduser -s /bin/false -G abc -D -H -u 1000 abc
-
 COPY ./start_samba.sh /start_samba.sh
 
 RUN sed -i "s/workgroup = MYGROUP/workgroup = WORKGROUP/g" /etc/samba/smb.conf && \
