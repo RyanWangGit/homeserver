@@ -29,8 +29,8 @@ RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mc
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN wget https://media.forgecdn.net/files/2723/275/worldedit-bukkit-7.0.0.jar \
-    -O /plugins/worldedit-bukkit-7.0.0.jar
+RUN wget https://media.forgecdn.net/files/2844/696/worldedit-bukkit-7.1.0-beta-1.jar \
+    -O /plugins/worldedit-bukkit-7.1.0.jar
 
 WORKDIR /minecraft
 
