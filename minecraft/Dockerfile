@@ -29,7 +29,7 @@ RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/ 
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN wget https://media.forgecdn.net/files/2844/696/worldedit-bukkit-7.1.0-beta-1.jar \
+RUN wget https://media.forgecdn.net/files/2863/96/worldedit-bukkit-7.1.0-rc-1.jar \
     -O /plugins/worldedit-bukkit-7.1.0.jar
 
 WORKDIR /minecraft
