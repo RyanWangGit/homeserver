@@ -25,7 +25,7 @@ RUN ESSENTIALSX_JAR=`curl -s https://ci.ender.zone/job/EssentialsX/lastSuccessfu
     -O "/plugins/${ESSENTIALSX_JAR}"
 
 # mcMMO
-RUN wget https://popicraft.net/jenkins/job/mcMMO/lastSuccessfulBuild/artifact/mcMMO/target/mcMMO.jar \
+RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/ \
     -O /plugins/mcMMO.jar
 
 # WorldEdit
