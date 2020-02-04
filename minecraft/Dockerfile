@@ -31,6 +31,10 @@ RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/t
 # WorldEdit
 RUN wget https://media.forgecdn.net/files/2863/96/worldedit-bukkit-7.1.0-rc-1.jar \
     -O /plugins/worldedit-bukkit-7.1.0.jar
+    
+# viaversion
+RUN wget https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/ViaVersion-2.2.3.jar \
+    -O /plugins/viaversion.jar
 
 WORKDIR /minecraft
 
