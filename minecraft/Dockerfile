@@ -33,8 +33,8 @@ RUN wget https://media.forgecdn.net/files/2869/453/worldedit-bukkit-7.1.0.jar \
     -O /plugins/worldedit-bukkit-7.1.0.jar
     
 # viaversion
-RUN wget https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/ViaVersion-2.2.3.jar \
-    -O /plugins/viaversion.jar
+RUN wget https://ci.viaversion.com/job/ViaVersion-Abstraction/lastSuccessfulBuild/artifact/jar/target/ViaVersion-3.0.0-SNAPSHOT.jar \
+    -O /plugins/viaversion-ABSTRACTION.jar
 
 WORKDIR /minecraft
 
