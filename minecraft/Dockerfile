@@ -37,7 +37,7 @@ RUN wget https://ci.viaversion.com/job/ViaVersion-Abstraction/lastSuccessfulBuil
     -O /plugins/viaversion-ABSTRACTION.jar
     
 # hibernate
-RUN wget https://www.spigotmc.org/resources/hibernate.4441/download?version=138511 \
+RUN wget https://media.forgecdn.net/files/863/59/Hibernate.jar \
     -O /plugins/hibernate.jar
 
 WORKDIR /minecraft
