@@ -29,7 +29,7 @@ RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/t
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN wget https://media.forgecdn.net/files/2863/96/worldedit-bukkit-7.1.0-rc-1.jar \
+RUN wget https://media.forgecdn.net/files/2869/453/worldedit-bukkit-7.1.0.jar \
     -O /plugins/worldedit-bukkit-7.1.0.jar
     
 # viaversion
