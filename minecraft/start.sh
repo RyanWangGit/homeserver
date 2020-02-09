@@ -30,7 +30,7 @@ ln -s /config/whitelist.json /minecraft/whitelist.json
 ln -s /config/wepif.yml /minecraft/wepif.yml
 
 # start the paper server using user `minecraft`
-java -Xmx2048M -Xms512M -jar /minecraft/paperclip.jar nogui \
+java -Xmx1024M -Xms128M -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=50 -jar /minecraft/paperclip.jar nogui \
     --noconsole \
     -c /config/server.properties \
     -b /config/bukkit.yml \
