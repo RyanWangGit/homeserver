@@ -8,15 +8,22 @@ WORKDIR /minecraft
 # add tini
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl util-linux git wget ca-certificates && \
+    curl util-linux git wget ca-certificates python3 python3-pip python3-dev gcc libc6-dev make && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
     rm tini.deb && \
     rm -rf /var/lib/apt/lists/*
 
+# add uvloop and coloredlogs
+RUN pip3 install setuptools
+RUN pip3 install uvloop coloredlogs
+
 # download paper server jar
 RUN wget https://papermc.io/ci/job/Paper-1.15/lastSuccessfulBuild/artifact/paperclip.jar
+
+# download manager python wrapper
+RUN wget https://gist.githubusercontent.com/yxwangcs/b82abf7424d02b384e4e5ee5985552b1/raw/mcmanager.py
 
 # install the plugins
 RUN mkdir /plugins
