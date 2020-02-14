@@ -8,7 +8,7 @@ WORKDIR /minecraft
 # add tini
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl util-linux git wget ca-certificates python3 python3-pip python3-dev gcc libc6-dev make net-tools && \
+    curl util-linux git wget ca-certificates python3 python3-pip net-tools && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
@@ -16,7 +16,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # add uvloop and coloredlogs
-RUN pip3 install setuptools
+RUN pip3 install wheel
 RUN pip3 install uvloop coloredlogs
 
 # download paper server jar
