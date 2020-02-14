@@ -16,8 +16,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # add uvloop and coloredlogs
-RUN pip3 install wheel setuptools
-RUN pip3 install uvloop coloredlogs
+RUN pip3 install -U setuptools pip
+RUN pip3 install --no-cache-dir uvloop coloredlogs
 
 # download paper server jar
 RUN wget https://papermc.io/ci/job/Paper-1.15/lastSuccessfulBuild/artifact/paperclip.jar
