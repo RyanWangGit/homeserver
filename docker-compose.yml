@@ -41,6 +41,7 @@ services:
     container_name: nginx
     volumes:
       - /config/nginx:/config
+      - /dynmap_data:/dynmap_data:ro
     restart: unless-stopped
 
   rclone:
