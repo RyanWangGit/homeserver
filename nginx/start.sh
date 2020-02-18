@@ -26,7 +26,7 @@ if [ -d "/config" ]; then
 fi
 
 # start and daemonize php-fpm
-su-exec abc:abc php-fpm7 -D
+php-fpm7 -D
 
 # start nginx
 nginx -g "daemon off;"
