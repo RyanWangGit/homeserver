@@ -42,6 +42,7 @@ services:
     container_name: nginx
     volumes:
       - /config/nginx:/config
+      - /config/minecraft/plugins/dynmap/web:/dynmap:ro
       - /dynmap_data:/dynmap_data:ro
     restart: unless-stopped
 
