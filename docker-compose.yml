@@ -6,6 +6,7 @@ services:
     container_name: minecraft
     volumes:
       - /config/minecraft:/config
+      - /dynmap_data:/dynmap_data
     environment:
       - EULA=true
       - PUID=1000
