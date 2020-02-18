@@ -11,22 +11,7 @@ if [ -d "/config" ]; then
     else
         su-exec abc:abc cp /etc/nginx/nginx.conf /config/nginx.conf
     fi
-    if [ -f "/config/php.ini" ]; then 
-        rm -f /etc/php7/php.ini
-        ln -s /config/php.ini /etc/php7/php.ini
-    else
-        su-exec abc:abc cp /etc/php7/php.ini /config/php.ini
-    fi
-    if [ -f "/config/php-fpm.conf" ]; then 
-        rm -f /etc/php7/php-fpm.conf
-        ln -s /config/php-fpm.conf /etc/php7/php-fpm.conf
-    else
-        su-exec abc:abc cp /etc/php7/php-fpm.conf /config/php-fpm.conf
-    fi
 fi
-
-# start and daemonize php-fpm
-php-fpm7 -D
 
 # start nginx
 nginx -g "daemon off;"
