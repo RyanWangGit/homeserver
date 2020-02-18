@@ -13,5 +13,8 @@ if [ -d "/config" ]; then
     fi
 fi
 
+# start and daemonize php-fpm
+su-exec abc:abc /usr/bin/php-fpm -D
+
 # start nginx
 nginx -g "daemon off;"
