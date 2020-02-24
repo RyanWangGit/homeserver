@@ -55,6 +55,8 @@ services:
       - CRON=0 3 * * *
       - FORCE_SYNC=1
       - TZ=America/New_York
+      - UID=1000
+      - GID=1000
       - CHECK_URL=https://hc-ping.com/e7c29a0a-dd5a-4c63-8db7-7bdc40faf3ea
     volumes:
       - /rclone:/config
