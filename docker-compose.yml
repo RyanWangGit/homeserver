@@ -62,3 +62,15 @@ services:
       - /rclone:/config
       - /config:/source:ro
     restart: unless-stopped
+    
+   homeassistant:
+     image: homeassistant/home-assistant:stable
+     network_mode: host
+     container_name: homeassistant
+     environment:
+       - TZ=TZ=America/New_York
+     volumes:
+       - /config/homeassistant:/config
+     restart: unless-stopped
+     
+     
