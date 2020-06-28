@@ -40,12 +40,14 @@ RUN wget https://media.forgecdn.net/files/2988/277/worldedit-bukkit-7.2.0-beta-0
     -O /plugins/worldedit-bukkit.jar
     
 # viaversion
-RUN wget https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/ViaVersion-3.0.2-SNAPSHOT.jar \
-    -O /plugins/viaversion.jar
+RUN VIAVERSION_JAR=`curl -s https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/ | grep -o "ViaVersion-[0-9.]*-\w*.jar" | head -n1` && \
+    wget "https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/${VIAVERSION_JAR}" \
+    -O "/plugins/${VIAVERSION_JAR}"
     
 # viabackwards
-RUN wget https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/ViaBackwards-3.0.2-SNAPSHOT.jar \
-    -O /plugins/viabackwards.jar
+RUN VIABACKWARDS_JAR=`curl -s https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/ | grep -o "ViaBackwards-[0-9.]*-\w*.jar" | head -n1` && \
+    wget "https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/${VIABACKWARDS_JAR}" \
+    -O "/plugins/${VIABACKWARDS_JAR}"
 
 WORKDIR /minecraft
 
