@@ -1,4 +1,4 @@
-FROM openjdk:13-slim
+FROM openjdk:14-slim
 COPY ./start.sh /start.sh
 COPY ./init.sh /init.sh
 
