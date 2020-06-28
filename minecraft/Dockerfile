@@ -8,7 +8,7 @@ WORKDIR /minecraft
 # add tini
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl util-linux git wget ca-certificates python3 python3-pip net-tools && \
+    curl util-linux git wget ca-certificates python3 python3-pip net-tools pcregrep && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
     dpkg -i tini.deb && \
@@ -38,8 +38,11 @@ RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/t
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN wget https://media.forgecdn.net/files/2988/277/worldedit-bukkit-7.2.0-beta-01.jar \
-    -O /plugins/worldedit-bukkit.jar
+RUN WORLDEDIT_JAR=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | grep -o "worldedit-bukkit-[0-9.]*-\w*-\w*\.jar" | head -n1` && \
+    BUILD_NUMBER=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"build_id\":([0-9]*)"` && \
+    BUILD_TYPE=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"buildType\":\"([\w\d]*)\""` && \
+    wget "https://ci.enginehub.org/repository/download/${BUILD_TYPE}/${BUILD_NUMBER}:id/${WORLDEDIT_JAR}?branch=master&guest=1" \
+    -O "/plugins/${WORLDEDIT_JAR}"
     
 # viaversion
 RUN VIAVERSION_JAR=`curl -s https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/ | grep -o "ViaVersion-[0-9.]*-\w*.jar" | head -n1` && \
