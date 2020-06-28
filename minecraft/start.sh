@@ -11,7 +11,7 @@ mkdir -p /config/plugins
 # remove older plugins
 rm -f /config/plugins/EssentialsX-*.jar
 rm -f /config/plugins/mcMMO*.jar
-rm -f /config/plugins/worldedit-bukkit-*.jar
+rm -f /config/plugins/worldedit-bukkit*.jar
 rm -f /config/plugins/viaversion*.jar
 rm -f /config/plugins/viabackwards*.jar
 
