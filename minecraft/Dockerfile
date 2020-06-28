@@ -53,6 +53,11 @@ RUN VIAVERSION_JAR=`curl -s https://ci.viaversion.com/job/ViaVersion/lastSuccess
 RUN VIABACKWARDS_JAR=`curl -s https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/ | grep -o "ViaBackwards-[0-9.]*-\w*.jar" | head -n1` && \
     wget "https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/${VIABACKWARDS_JAR}" \
     -O "/plugins/${VIABACKWARDS_JAR}"
+    
+# Dynmap
+RUN DYNMAP_JAR=`curl -s https://dynmap.us/builds/dynmap/ | pcregrep -o1 "\"(Dynmap-[\d.]*-SNAPSHOT-spigot\.jar)\"" | sort -V -r | head -n1` && \
+    wget "https://dynmap.us/builds/dynmap/${DYNMAP_JAR}" \
+    -O "/plugins/${DYNMAP_JAR}"
 
 WORKDIR /minecraft
 
