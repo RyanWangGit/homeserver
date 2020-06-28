@@ -20,7 +20,9 @@ RUN pip3 install -U setuptools pip
 RUN pip3 install --no-cache-dir uvloop coloredlogs
 
 # download paper server jar
-RUN wget https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/paperclip-3.jar -O paperclip.jar
+RUN PAPERCLIP_JAR=`curl -s https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/ | grep -o "paperclip-[0-9]*\.jar" | head -n1` && \
+    wget "https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/${PAPERCLIP_JAR}" \
+    -O paperclip.jar
 
 # download manager python wrapper
 RUN wget https://gist.githubusercontent.com/yxwangcs/b82abf7424d02b384e4e5ee5985552b1/raw/mcmanager.py
