@@ -76,3 +76,19 @@ services:
       - /config/homeassistant:/config
       - /config/homeassistant/docker/run:/etc/services.d/home-assistant/run:ro
     restart: unless-stopped
+
+  jellyfin:
+    image: linuxserver/jellyfin
+    network_mode: host
+    container_name: jellyfin
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - GUID=1000
+    volumes:
+      - /config/jellyfin:/config
+      - /mnt/usb/media/tvshows:/data/tvshows:ro
+      - /mnt/usb/media/movies:/data/movies:ro
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
