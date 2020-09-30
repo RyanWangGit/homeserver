@@ -25,5 +25,8 @@ Uses [`pfidr/rclone`](https://hub.docker.com/r/pfidr/rclone/) image, see [docker
 ### Minecraft
 [PaperMC](https://www.papermc.io/) 1.16.2 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins. It puts all config and world files in to external `/config` folder.
 
+### Jellyfin
+[`linuxserver/jellyfin`](https://hub.docker.com/r/linuxserver/jellyfin) for home media services.
+
 ## License
 [MIT](https://github.com/yxwangcs/homeserver/blob/master/LICENSE).
