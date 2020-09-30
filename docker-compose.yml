@@ -69,8 +69,10 @@ services:
     container_name: homeassistant
     environment:
       - TZ=TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+      - PACKAGES=iputils
     volumes:
       - /config/homeassistant:/config
+      - /config/homeassistant/docker/run:/etc/services.d/home-assistant/run:ro
     restart: unless-stopped
-     
-     
