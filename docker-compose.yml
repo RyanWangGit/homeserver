@@ -12,7 +12,7 @@ services:
       - PUID=1000
       - PGID=1000
     restart: unless-stopped
-  
+
   samba:
     build: ./samba
     network_mode: host
@@ -20,6 +20,7 @@ services:
     volumes:
       - /config/samba:/config
       - /mnt/usb/media:/share:ro
+      - /mnt/usb/temp:/temp
     restart: unless-stopped
 
   transmission:
@@ -35,11 +36,15 @@ services:
       - PGID=1000
       - TRANSMISSION_WEB_HOME=/transmission-web-control
     restart: unless-stopped
-  
+
   nginx:
     build: ./nginx
     network_mode: host
     container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
     volumes:
       - /config/nginx:/config
       - /config/minecraft/plugins/dynmap/web:/dynmap:ro
@@ -62,13 +67,13 @@ services:
       - /rclone:/config
       - /config:/source:ro
     restart: unless-stopped
-    
+
   homeassistant:
     image: homeassistant/home-assistant:stable
     network_mode: host
     container_name: homeassistant
     environment:
-      - TZ=TZ=America/New_York
+      - TZ=America/New_York
       - PUID=1000
       - PGID=1000
       - PACKAGES=iputils
@@ -89,6 +94,7 @@ services:
       - /config/jellyfin:/config
       - /mnt/usb/media/tvshows:/data/tvshows:ro
       - /mnt/usb/media/movies:/data/movies:ro
+      - /transcode:/transcode
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
