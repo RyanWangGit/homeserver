@@ -1,6 +1,3 @@
 #!/usr/bin/with-contenv bash
 
-if [ ! -f /config/root.key ]; then \
-    s6-setuidgid abc /opt/unbound/sbin/unbound-anchor -v
-    cp /var/run/unbound/root.key /config/root.key
-fi
+s6-setuidgid abc /opt/unbound/sbin/unbound-anchor -v
