@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+if [ ! -f /config/unbound.conf ]; then \
+    cp /opt/unbound/etc/unbound/unbound.conf /config/unbound.conf
+fi
+
+# permissions
+chown -R abc:abc /config

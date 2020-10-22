@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+echo "Starting unbound"
+exec /opt/unbound/sbin/unbound -v -d -c /config/unbound.conf 2>&1

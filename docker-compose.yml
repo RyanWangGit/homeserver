@@ -89,7 +89,7 @@ services:
     environment:
       - TZ=America/New_York
       - PUID=1000
-      - GUID=1000
+      - PGID=1000
     volumes:
       - /config/jellyfin:/config
       - /mnt/usb/media/tvshows:/data/tvshows:ro
@@ -98,3 +98,16 @@ services:
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
+  
+  unbound:
+    build: ./unbound
+    network_mode: host
+    container_name: unbound
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config/unbound:/config
+    restart: unless-stopped
+

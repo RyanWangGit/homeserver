@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p /var/run/unbound
+
+# permissions
+chown abc:abc /var/run/unbound
