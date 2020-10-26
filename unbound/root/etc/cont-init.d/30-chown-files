@@ -4,3 +4,4 @@ mkdir -p /var/run/unbound
 
 # permissions
 chown abc:abc /var/run/unbound
+chown -R abc:abc /opt

@@ -31,7 +31,7 @@ RUN rm -rf /tmp/* /opt/*/include /opt/*/man /opt/*/share \
 
 FROM lsiobase/alpine:3.12
 
-COPY --from=builder --chown=abc:abc /opt /opt
+COPY --from=builder /opt /opt
 
 RUN apk --no-cache add dns-root-hints
 
