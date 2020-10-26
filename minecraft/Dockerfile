@@ -53,8 +53,8 @@ RUN DYNMAP_JAR=`curl -s https://dynmap.us/builds/dynmap/ | pcregrep -o1 "\"(Dynm
 
 FROM lsiobase/alpine:edge
 
-COPY --from=builder --chown=abc:abc /minecraft /minecraft
-COPY --from=builder --chown=abc:abc /plugins /plugins
+COPY --from=builder /minecraft /minecraft
+COPY --from=builder /plugins /plugins
 
 WORKDIR /minecraft
 
