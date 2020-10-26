@@ -70,8 +70,11 @@ services:
 
   homeassistant:
     image: homeassistant/home-assistant:stable
-    network_mode: host
     container_name: homeassistant
+    ports:
+      - 9999:9999       # for web
+      - 5353:5353/udp   # HomeKit (mDNS)
+      - 51827:51827/tcp # HomeKit
     environment:
       - TZ=America/New_York
       - PUID=1000
