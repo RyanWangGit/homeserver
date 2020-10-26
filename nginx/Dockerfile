@@ -1,10 +1,7 @@
-FROM nginx:stable-alpine
+FROM lsiobase/alpine:edge
 
-RUN apk add --update --no-cache tini su-exec && \
-    rm -rf /var/cache/apk/*
+RUN apk add --no-cache nginx
 
-COPY ./start.sh /start.sh
+COPY /root /
 
-ENTRYPOINT ["tini", "--"]
-
-CMD ["sh", "/start.sh"]
+VOLUME /config

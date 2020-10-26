@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p /config
+
+# copy the default nginx.conf file to external config folder if not present
+if [ ! -f /config/nginx.conf ]; then 
+    cp /etc/nginx/nginx.conf /config/nginx.conf
+fi
+
+chown -R abc:abc /config
