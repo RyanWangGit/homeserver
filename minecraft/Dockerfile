@@ -1,23 +1,14 @@
-FROM openjdk:14-slim
-COPY ./start.sh /start.sh
-COPY ./init.sh /init.sh
+FROM alpine:edge AS builder
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
 
-# add tini
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    curl util-linux git wget ca-certificates python3 python3-pip net-tools pcregrep && \
-    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
-    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
-    dpkg -i tini.deb && \
-    rm tini.deb && \
-    rm -rf /var/lib/apt/lists/*
-
-# add uvloop and coloredlogs
-RUN pip3 install -U setuptools pip
-RUN pip3 install --no-cache-dir uvloop coloredlogs
+RUN apk add --no-cache \
+    curl \
+    git \
+    wget \
+    ca-certificates \
+    pcre-tools
 
 # download paper server jar
 RUN PAPERCLIP_JAR=`curl -s https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/ | grep -o "paperclip-[0-9]*\.jar" | head -n1` && \
@@ -59,11 +50,27 @@ RUN DYNMAP_JAR=`curl -s https://dynmap.us/builds/dynmap/ | pcregrep -o1 "\"(Dynm
     wget "https://dynmap.us/builds/dynmap/${DYNMAP_JAR}" \
     -O "/plugins/${DYNMAP_JAR}"
 
+
+FROM lsiobase/alpine:edge
+
+COPY --from=builder --chown=abc:abc /minecraft /minecraft
+COPY --from=builder --chown=abc:abc /plugins /plugins
+
 WORKDIR /minecraft
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+# install python3
+RUN apk add --no-cache python3 py3-pip 
 
-CMD ["/bin/sh", "/init.sh"]
+# install uvloop
+RUN apk add --no-cache make gcc g++ python3-dev \
+    && pip3 install -U wheel pip \
+    && pip3 install uvloop \
+    && apk del make gcc g++ python3-dev 
+
+# install openjdk
+RUN apk add --no-cache openjdk15-jre-headless --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+COPY root/ /
 
 EXPOSE 25565
-VOLUME ["/config"]
+VOLUME /config

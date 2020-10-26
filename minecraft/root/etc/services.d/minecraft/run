@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+# start the paper server using user `minecraft`
+LOCAL_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.*' | grep -v '172.*' | grep -m1 '')
+s6-setuidgid abc python3 /minecraft/mcmanager.py $LOCAL_IP 25565 127.0.0.1 25564 "/minecraft/paperclip.jar nogui --noconsole -c /config/server.properties -b /config/bukkit.yml -S /config/spigot.yml --paper /config/paper.yml -C /config/commands.yml -W /config/world -P /config/plugins" "-Xmx1024M -Xms512M -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=50"

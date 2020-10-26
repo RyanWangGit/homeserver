@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+if [ ! -z $EULA ]; then 
+    s6-setuidgid abc echo "eula=$EULA" > /minecraft/eula.txt
+fi

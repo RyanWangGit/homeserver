@@ -1,0 +1,34 @@
+#!/usr/bin/with-contenv bash
+
+# create config folder
+mkdir -p /config
+
+# copy the compiled plugins to config folder
+mkdir -p /config/plugins
+
+# remove older plugins
+rm -f /config/plugins/EssentialsX-*.jar
+rm -f /config/plugins/mcMMO*.jar
+rm -f /config/plugins/worldedit-bukkit*.jar
+rm -f /config/plugins/viaversion*.jar
+rm -f /config/plugins/viabackwards*.jar
+rm -f /config/plugins/Dynmap*.jar
+
+# copy compiled plugins
+cp /plugins/*.jar /config/plugins/
+
+# create world folder if not present
+mkdir -p /config/world
+
+# set correct owner
+chown -R abc:abc /config
+
+# symlinks the config files that cannot be specified from command line to spigot
+rm -f /minecraft/ops.json
+rm -f /minecraft/permissions.yml
+rm -f /minecraft/whitelist.json
+rm -f /minecraft/wepif.yml
+s6-setuidgid abc ln -s /config/ops.json /minecraft/ops.json
+s6-setuidgid abc ln -s /config/permissions.yml /minecraft/permissions.yml
+s6-setuidgid abc ln -s /config/whitelist.json /minecraft/whitelist.json
+s6-setuidgid abc ln -s /config/wepif.yml /minecraft/wepif.yml
