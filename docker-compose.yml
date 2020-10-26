@@ -21,6 +21,9 @@ services:
       - /config/samba:/config
       - /mnt/usb/media:/share:ro
       - /mnt/usb/temp:/temp
+    environment:
+      - PUID=1000
+      - PGID=1000
     restart: unless-stopped
 
   transmission:
