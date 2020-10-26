@@ -10,8 +10,8 @@ mkdir -p /config/plugins
 rm -f /config/plugins/EssentialsX-*.jar
 rm -f /config/plugins/mcMMO*.jar
 rm -f /config/plugins/worldedit-bukkit*.jar
-rm -f /config/plugins/viaversion*.jar
-rm -f /config/plugins/viabackwards*.jar
+rm -f /config/plugins/ViaVersion*.jar
+rm -f /config/plugins/ViaBackwards*.jar
 rm -f /config/plugins/Dynmap*.jar
 
 # copy compiled plugins
