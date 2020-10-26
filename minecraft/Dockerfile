@@ -64,7 +64,7 @@ RUN apk add --no-cache python3 py3-pip
 # install uvloop
 RUN apk add --no-cache make gcc g++ python3-dev \
     && pip3 install -U wheel pip \
-    && pip3 install uvloop \
+    && pip3 install uvloop coloredlogs \
     && apk del make gcc g++ python3-dev 
 
 # install openjdk
