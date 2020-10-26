@@ -1,7 +1,8 @@
 #!/usr/bin/with-contenv bash
 
+mkdir -p /config
 
-# create correct symlink if external config is given
+# copy the default smb.conf file to external config folder if not present
 if [ ! -f /config/smb.conf ]; then
     sed -i "s/workgroup = MYGROUP/workgroup = WORKGROUP/g" /etc/samba/smb.conf && \
     sed -i "s/server string = Samba Server/server string = Homeserver Samba/g" /etc/samba/smb.conf && \
@@ -12,10 +13,7 @@ if [ ! -f /config/smb.conf ]; then
     echo "   only guest = yes" >> /etc/samba/smb.conf && \
     echo "   guest account = abc" >> /etc/samba/smb.conf
     cp /etc/samba/smb.conf /config/smb.conf
+    
 fi
 
-rm /etc/samba/smb.conf
-
 chown -R abc:abc /config
-ln -s /config/smb.conf /etc/samba/smb.conf
-
