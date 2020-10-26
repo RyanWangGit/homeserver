@@ -9,8 +9,7 @@ RUN apk add --no-cache \
     linux-headers \
     libevent-dev \
     libevent-static \
-    openssl-dev \
-    openssl-libs-static \
+    libressl-dev \
     perl
 
 WORKDIR /tmp/unbound
