@@ -22,13 +22,3 @@ mkdir -p /config/world
 
 # set correct owner
 chown -R abc:abc /config
-
-# symlinks the config files that cannot be specified from command line to spigot
-rm -f /minecraft/ops.json
-rm -f /minecraft/permissions.yml
-rm -f /minecraft/whitelist.json
-rm -f /minecraft/wepif.yml
-s6-setuidgid abc ln -s /config/ops.json /minecraft/ops.json
-s6-setuidgid abc ln -s /config/permissions.yml /minecraft/permissions.yml
-s6-setuidgid abc ln -s /config/whitelist.json /minecraft/whitelist.json
-s6-setuidgid abc ln -s /config/wepif.yml /minecraft/wepif.yml
