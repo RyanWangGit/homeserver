@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+avahi-daemon --debug -f /config/avahi-daemon.conf

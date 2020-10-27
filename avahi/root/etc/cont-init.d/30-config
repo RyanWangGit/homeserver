@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p /config
+
+# copy the default nginx.conf file to external config folder if not present
+if [ ! -f /config/avahi-daemon.conf ]; then 
+    cp /etc/avahi/avahi-daemon.conf /config/avahi-daemon.conf
+fi
+
+if [ ! -f /config/hosts ]; then
+    cp /etc/avahi/hosts /config/hosts
+fi
+
+
+mkdir -p /config/services
+
+chown -R abc:abc /config

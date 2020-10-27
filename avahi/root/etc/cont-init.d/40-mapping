@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+rm -f /etc/avahi/hosts
+ln -s /config/hosts /etc/avahi/hosts

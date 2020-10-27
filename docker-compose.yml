@@ -113,4 +113,17 @@ services:
     volumes:
       - /config/unbound:/config
     restart: unless-stopped
-
+  
+  # for HomeKit and Samba's mDNS service
+  avahi:
+    build: ./avahi
+    container_name: avahi
+    network_mode: host
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config/avahi:/config
+      - /config/avahi/services:/etc/avahi/services:ro
+    restart: unless-stopped
