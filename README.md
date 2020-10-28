@@ -14,16 +14,19 @@ This project contains many `Dockerfile`s in folders to build each individual app
 Uses [`linuxserver/transmission`](https://hub.docker.com/r/linuxserver/transmission), see [docker-compose.yml](https://github.com/yxwangcs/homeserver/blob/master/docker-compose.yml#L22-L33) for the configurations.
 
 ### Nginx
-Uses [`linuxserver/nginx`](https://hub.docker.com/r/linuxserver/nginx), this is set up mainly for transmission `rpc` and `web` services, since it uses plain http without encryption. This container sets up a SSL proxy for it, but uses a self-signed certificate.
+Uses `lsiobase/alpine:edge` and installs nginx. This is set up mainly for transmission `rpc` and `web` services, since it uses plain http without encryption. This container sets up a SSL proxy for it, but uses a self-signed certificate.
 
 ### Samba
-Build upon `alpine:edge` image and includes `avahi` to broadcast samba service (`NetBios` is disabled since the [latest Windows 10 seems to supports mDNS](https://social.technet.microsoft.com/Forums/en-US/b334e797-ef80-4525-b74a-b4830420a14e/windows-10-spams-network-with-invalid-mdns-response-packets?forum=win10itpronetworking), at least is working for me). The config for `avahi` is not linked to external `/config` folder, see [samba/smb.services](https://github.com/yxwangcs/homeserver/blob/master/samba/smb.service) for the configuration of `avahi`.
+Build upon `lsiobase/alpine:edge` and installs the latest samba.
+
+### Avahi
+For advertising samba services.
 
 ### Rclone
 Uses [`pfidr/rclone`](https://hub.docker.com/r/pfidr/rclone/) image, see [docker-compose.yml](https://github.com/yxwangcs/homeserver/blob/master/docker-compose.yml#L43-L56) for detailed settings. Note that the config is mapped to `/rclone` in host machine and the backup folder (`/config` in host -> `/source` in container) is given read only permission.
 
 ### Minecraft
-[PaperMC](https://www.papermc.io/) 1.16.2 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins. It puts all config and world files in to external `/config` folder.
+[PaperMC](https://www.papermc.io/) 1.16.4 minecraft server with [EssentialsX](https://github.com/EssentialsX/Essentials), [mcMMO](https://github.com/mcMMO-Dev/mcMMO) and [WorldEdit](https://github.com/EngineHub/WorldEdit) plugins. It puts all config and world files in to external `/config` folder.
 
 ### Jellyfin
 [`linuxserver/jellyfin`](https://hub.docker.com/r/linuxserver/jellyfin) for home media services.
