@@ -1,6 +1,6 @@
 version: "3"
 services:
-  minecraft:
+  minecraft: # 25565/tcp localhost 255
     build: ./minecraft
     network_mode: host
     container_name: minecraft
@@ -13,7 +13,7 @@ services:
       - PGID=1000
     restart: unless-stopped
 
-  samba:
+  samba: # 445/tcp
     build: ./samba
     network_mode: host
     container_name: samba
@@ -26,7 +26,7 @@ services:
       - PGID=1000
     restart: unless-stopped
 
-  transmission:
+  transmission: # localhost 9091
     image: linuxserver/transmission
     network_mode: host
     container_name: transmission
@@ -40,7 +40,7 @@ services:
       - TRANSMISSION_WEB_HOME=/transmission-web-control
     restart: unless-stopped
 
-  nginx:
+  nginx: # reverse proxy
     build: ./nginx
     network_mode: host
     container_name: nginx
@@ -72,7 +72,7 @@ services:
     restart: unless-stopped
 
   homeassistant: # 9999/tcp 5353/udp 51827/tcp
-    image: homeassistant/home-assistant:stable
+    image: homeassistant/home-assistant:0.114.4
     container_name: homeassistant
     network_mode: host
     environment:
@@ -127,3 +127,12 @@ services:
       - /config/avahi:/config
       - /config/avahi/services:/etc/avahi/services:ro
     restart: unless-stopped
+
+  grafana: # 3000
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    user: "1000"
+    volumes:
+      - /config/grafana:/var/lib/grafana

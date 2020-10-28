@@ -31,5 +31,8 @@ Uses [`pfidr/rclone`](https://hub.docker.com/r/pfidr/rclone/) image, see [docker
 ### Jellyfin
 [`linuxserver/jellyfin`](https://hub.docker.com/r/linuxserver/jellyfin) for home media services.
 
+### Grafana
+Uses official grafana docker image for visualizing statistics of systems.
+
 ## License
 [MIT](https://github.com/yxwangcs/homeserver/blob/master/LICENSE).
