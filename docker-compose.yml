@@ -71,7 +71,7 @@ services:
       - /config:/source:ro
     restart: unless-stopped
 
-  homeassistant:
+  homeassistant: # 9999/tcp 5353/udp 51827/tcp
     image: homeassistant/home-assistant:stable
     container_name: homeassistant
     network_mode: host
@@ -85,7 +85,7 @@ services:
       - /config/homeassistant/docker/run:/etc/services.d/home-assistant/run:ro
     restart: unless-stopped
 
-  jellyfin:
+  jellyfin: # 8096/tcp
     image: linuxserver/jellyfin
     network_mode: host
     container_name: jellyfin
@@ -102,7 +102,7 @@ services:
       - /dev/dri:/dev/dri
     restart: unless-stopped
   
-  unbound:
+  unbound: # localhost 5335/udp
     build: ./unbound
     network_mode: host
     container_name: unbound
@@ -115,7 +115,7 @@ services:
     restart: unless-stopped
   
   # for HomeKit and Samba's mDNS service
-  avahi:
+  avahi: # 5353/udp
     build: ./avahi
     container_name: avahi
     network_mode: host
