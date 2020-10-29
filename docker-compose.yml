@@ -1,6 +1,6 @@
 version: "3"
 services:
-  minecraft: # 25565/tcp localhost 255
+  minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
     build: ./minecraft
     network_mode: host
     container_name: minecraft
@@ -26,7 +26,7 @@ services:
       - PGID=1000
     restart: unless-stopped
 
-  transmission: # localhost 9091
+  transmission: # 127.0.0.1:9091 *:51413
     image: linuxserver/transmission
     network_mode: host
     container_name: transmission
@@ -50,8 +50,8 @@ services:
       - TZ=America/New_York
     volumes:
       - /config/nginx:/config
-      - /config/minecraft/plugins/dynmap/web:/dynmap:ro
-      - /dynmap_data:/dynmap_data:ro
+      - /config/minecraft/plugins/dynmap/web:/dynmap:ro # for dynmap
+      - /dynmap_data:/dynmap_data:ro # for dynmap
     restart: unless-stopped
 
   rclone:
@@ -71,7 +71,7 @@ services:
       - /config:/source:ro
     restart: unless-stopped
 
-  homeassistant: # 9999/tcp 5353/udp 51827/tcp
+  homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
     image: homeassistant/home-assistant:0.114.4
     container_name: homeassistant
     network_mode: host
@@ -85,7 +85,7 @@ services:
       - /config/homeassistant/docker/run:/etc/services.d/home-assistant/run:ro
     restart: unless-stopped
 
-  jellyfin: # 8096/tcp
+  jellyfin: # 127.0.0.1:8096/tcp
     image: linuxserver/jellyfin
     network_mode: host
     container_name: jellyfin
@@ -102,7 +102,7 @@ services:
       - /dev/dri:/dev/dri
     restart: unless-stopped
   
-  unbound: # localhost 5335/udp
+  unbound: # 127.0.0.1:5335/udp
     build: ./unbound
     network_mode: host
     container_name: unbound
