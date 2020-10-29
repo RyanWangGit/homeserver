@@ -37,7 +37,6 @@ services:
       - TZ=America/New_York
       - PUID=1000
       - PGID=1000
-      - TRANSMISSION_WEB_HOME=/transmission-web-control
     restart: unless-stopped
 
   nginx: # reverse proxy
