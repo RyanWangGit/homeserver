@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
 
 nginx -V
-nginx -g "daemon off;" -c /config/nginx.conf
+nginx -g "daemon off; error_log /dev/stdout info;" -c /config/nginx.conf
