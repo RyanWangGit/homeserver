@@ -1,4 +1,4 @@
-FROM alpine:edge AS builder
+FROM alpine:3.12 AS builder
 
 RUN mkdir /minecraft
 WORKDIR /minecraft
@@ -51,7 +51,7 @@ RUN DYNMAP_JAR=`curl -s https://dynmap.us/builds/dynmap/ | pcregrep -o1 "\"(Dynm
     -O "/plugins/${DYNMAP_JAR}"
 
 
-FROM lsiobase/alpine:edge
+FROM lsiobase/alpine:3.12
 
 COPY --from=builder /minecraft /minecraft
 COPY --from=builder /plugins /plugins
