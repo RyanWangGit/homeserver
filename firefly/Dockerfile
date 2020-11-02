@@ -1,6 +1,6 @@
 FROM lsiobase/alpine:edge
 
-ENV FIREFLY_VERSION=5.4.0
+ENV FIREFLY_VERSION=5.4.5
 ENV FIREFLY_PATH=/var/www/html
 
 # Install Dependencies
