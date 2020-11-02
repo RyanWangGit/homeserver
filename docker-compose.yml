@@ -127,11 +127,15 @@ services:
       - /config/avahi/services:/etc/avahi/services:ro
     restart: unless-stopped
 
-  grafana: # 3000
-    image: grafana/grafana
-    container_name: grafana
+  firefly:
+    build: ./firefly
+    container_name: firefly
     ports:
-      - 3000:3000
-    user: "1000"
+      - 127.0.0.1:7000:80
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
     volumes:
-      - /config/grafana:/var/lib/grafana
+      - /config/firefly:/config
+    restart: unless-stopped

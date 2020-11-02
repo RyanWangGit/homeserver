@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+php-fpm7 -v
+php-fpm7 -d error_log=/dev/stdout
+nginx -V
+nginx -c /defaults/nginx.conf
