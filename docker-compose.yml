@@ -26,6 +26,22 @@ services:
       - PGID=1000
     restart: unless-stopped
 
+  # for Samba's mDNS service
+  avahi: # 5353/udp
+    depends_on: 
+      - samba
+    build: ./avahi
+    container_name: avahi
+    network_mode: host
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config/avahi:/config
+      - /config/avahi/services:/etc/avahi/services:ro
+    restart: unless-stopped
+
   transmission: # 127.0.0.1:9091 *:51413
     image: linuxserver/transmission
     network_mode: host
@@ -113,20 +129,6 @@ services:
       - /config/unbound:/config
     restart: unless-stopped
   
-  # for HomeKit and Samba's mDNS service
-  avahi: # 5353/udp
-    build: ./avahi
-    container_name: avahi
-    network_mode: host
-    environment:
-      - TZ=America/New_York
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /config/avahi:/config
-      - /config/avahi/services:/etc/avahi/services:ro
-    restart: unless-stopped
-
   firefly:
     build: ./firefly
     container_name: firefly
