@@ -22,8 +22,6 @@ RUN apk add --no-cache \
   php7-tokenizer \
   php7-iconv \
   php7-dom \
-  php7-sqlite3 \
-  php7-pdo_sqlite \
   php7-openssl \
   php7-json \
   php7-mbstring \
@@ -31,7 +29,9 @@ RUN apk add --no-cache \
   php7-session \
   php7-simplexml \
   php7-xml \
-  php7-xmlwriter
+  php7-xmlwriter \
+  php7-mysqli \
+  php7-pdo_mysql
 
 RUN echo "**** install composer ****" && \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
