@@ -130,6 +130,8 @@ services:
     restart: unless-stopped
   
   firefly:
+    depends_on:
+      - firefly_db
     build: ./firefly
     container_name: firefly
     ports:
@@ -139,5 +141,17 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /config/firefly:/config
+      - /config/firefly/app:/config
     restart: unless-stopped
+
+  firefly_db:
+    image: linuxserver/mariadb
+    container_name: firefly_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/firefly/db:/config
+    restart: unless-stopped
+
