@@ -67,6 +67,9 @@ RUN apk add --no-cache make gcc g++ python3-dev \
     && pip3 install uvloop coloredlogs \
     && apk del make gcc g++ python3-dev 
 
+# add webp support for dynmap
+RUN apk add --no-cache libwebp-tools
+
 # install openjdk
 RUN apk add --no-cache openjdk15-jre-headless --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
