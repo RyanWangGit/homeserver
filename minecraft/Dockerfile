@@ -29,9 +29,9 @@ RUN wget https://papermc.io/ci/view/all/job/mcMMO/lastSuccessfulBuild/artifact/t
     -O /plugins/mcMMO.jar
 
 # WorldEdit
-RUN WORLDEDIT_JAR=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | grep -o "worldedit-bukkit-[0-9.]*-\w*-\w*\.jar" | head -n1` && \
-    BUILD_NUMBER=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"build_id\":([0-9]*)"` && \
-    BUILD_TYPE=`curl -s https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"buildType\":\"([\w\d]*)\""` && \
+RUN WORLDEDIT_JAR=`curl -s -L https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | grep -o "worldedit-bukkit-[0-9.]*-\w*-\w*\.jar" | head -n1` && \
+    BUILD_NUMBER=`curl -s -L https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"build_id\":([0-9]*)"` && \
+    BUILD_TYPE=`curl -s -L https://builds.enginehub.org/job/worldedit/last-successful\?branch\=master | pcregrep -o1 "\"buildType\":\"([\w\d]*)\""` && \
     wget "https://ci.enginehub.org/repository/download/${BUILD_TYPE}/${BUILD_NUMBER}:id/${WORLDEDIT_JAR}?branch=master&guest=1" \
     -O "/plugins/${WORLDEDIT_JAR}"
     
