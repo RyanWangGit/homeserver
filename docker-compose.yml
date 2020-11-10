@@ -129,33 +129,6 @@ services:
       - /config/unbound:/config
     restart: unless-stopped
   
-  firefly:
-    depends_on:
-      - firefly_db
-    build: ./firefly
-    container_name: firefly
-    ports:
-      - 127.0.0.1:7000:80
-    environment:
-      - TZ=America/New_York
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /config/firefly/app:/config
-    restart: unless-stopped
-  
-  firefly_db:
-    image: linuxserver/mariadb
-    container_name: firefly_db
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-    volumes:
-      - /config/firefly/db:/config
-    restart: unless-stopped
-
-  
   pihole: # *:53 127.0.0.1:5000
     container_name: pihole
     # official pihole docker lacks PUID and PGID
