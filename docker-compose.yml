@@ -143,7 +143,7 @@ services:
     volumes:
       - /config/firefly/app:/config
     restart: unless-stopped
-
+  
   firefly_db:
     image: linuxserver/mariadb
     container_name: firefly_db
@@ -155,3 +155,24 @@ services:
       - /config/firefly/db:/config
     restart: unless-stopped
 
+  
+  pihole: # *:53 127.0.0.1:5000
+    container_name: pihole
+    # official pihole docker lacks PUID and PGID
+    # track https://github.com/pi-hole/docker-pi-hole/issues/328 for news
+    # so we apply various patches to the official pihole image to make some customizations
+    # so that the config files' permissions are not messed up and setupvars won't be overriden 
+    # everytime the container restarts
+    build: ./pihole
+    network_mode: host
+    environment:
+      - TZ='America/New_York'
+      - WEB_PORT=5000
+      - ServerIP=127.0.0.1
+      - DNSMASQ_LISTENING=enp12s0
+      - INTERFACE=enp12s0
+      - DNSMASQ_USER=pihole
+    volumes:
+      - /config/pihole/pihole:/etc/pihole/
+      - /config/pihole/dnsmasq:/etc/dnsmasq.d/
+    restart: unless-stopped
