@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-chown -R abc:abc ${FIREFLY_PATH}/storage
-chmod -R 775 ${FIREFLY_PATH}/storage
