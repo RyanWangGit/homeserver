@@ -69,21 +69,18 @@ services:
       - /dynmap_data:/dynmap_data:ro # for dynmap
     restart: unless-stopped
 
-  rclone:
-    image: pfidr/rclone
-    container_name: rclone
+  duplicati:
+    image: ghcr.io/linuxserver/duplicati
+    container_name: duplicati
     environment:
-      - SYNC_SRC=/source
-      - SYNC_DEST=gdrive:homeserver
-      - CRON=0 3 * * *
-      - FORCE_SYNC=1
+      - PUID=1000
+      - PGID=1000
       - TZ=America/New_York
-      - UID=1000
-      - GID=1000
-      - CHECK_URL=https://hc-ping.com/e7c29a0a-dd5a-4c63-8db7-7bdc40faf3ea
     volumes:
-      - /rclone:/config
-      - /config:/source:ro
+      - /config/duplicati:/config
+      - /config:/source
+    ports:
+      - 8200:8200
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
