@@ -80,7 +80,7 @@ services:
       - /config/duplicati:/config
       - /config:/source
     ports:
-      - 8200:8200
+      - 127.0.0.1:8200:8200
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
