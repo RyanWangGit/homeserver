@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   transmission: # 127.0.0.1:9091 *:51413
-    image: linuxserver/transmission
+    image: ghcr.io/linuxserver/transmission
     network_mode: host
     container_name: transmission
     volumes:
@@ -98,7 +98,7 @@ services:
     restart: unless-stopped
 
   jellyfin: # 127.0.0.1:8096/tcp
-    image: linuxserver/jellyfin
+    image: ghcr.io/linuxserver/jellyfin
     network_mode: host
     container_name: jellyfin
     environment:
