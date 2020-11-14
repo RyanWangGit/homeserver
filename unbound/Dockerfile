@@ -28,7 +28,7 @@ RUN rm -rf /tmp/* /opt/*/include /opt/*/man /opt/*/share \
     && strip /opt/unbound/sbin/unbound
 
 
-FROM lsiobase/alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 
 COPY --from=builder /opt /opt
 
