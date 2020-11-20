@@ -12,7 +12,7 @@ rm -f /config/plugins/mcMMO*.jar
 rm -f /config/plugins/worldedit-bukkit*.jar
 rm -f /config/plugins/ViaVersion*.jar
 rm -f /config/plugins/ViaBackwards*.jar
-rm -f /config/plugins/Dynmap*.jar
+rm -f /config/plugins/BlueMap*.jar
 
 # copy compiled plugins
 cp /plugins/*.jar /config/plugins/

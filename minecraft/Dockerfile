@@ -45,10 +45,8 @@ RUN VIABACKWARDS_JAR=`curl -s https://ci.viaversion.com/view/ViaBackwards/job/Vi
     wget "https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/${VIABACKWARDS_JAR}" \
     -O "/plugins/${VIABACKWARDS_JAR}"
     
-# Dynmap
-RUN DYNMAP_JAR=`curl -s https://dynmap.us/builds/dynmap/ | pcregrep -o1 "\"(Dynmap-[\d.]*-SNAPSHOT-spigot\.jar)\"" | sort -V -r | head -n1` && \
-    wget "https://dynmap.us/builds/dynmap/${DYNMAP_JAR}" \
-    -O "/plugins/${DYNMAP_JAR}"
+# BlueMap
+RUN curl -s https://api.github.com/repos/BlueMap-Minecraft/BlueMap/releases | grep -wo "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/.*BlueMap.*-spigot\.jar" | head -n 1 | wget -i -
 
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.12

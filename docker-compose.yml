@@ -65,8 +65,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /config/nginx:/config
-      - /config/minecraft/plugins/dynmap/web:/dynmap:ro # for dynmap
-      - /dynmap_data:/dynmap_data:ro # for dynmap
+      - /config/minecraft/plugins/BlueMap/web:/bluemap:ro # for bluemap
     restart: unless-stopped
 
   duplicati:
@@ -84,7 +83,7 @@ services:
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
-    image: homeassistant/home-assistant:0.114.4
+    image: homeassistant/home-assistant:dev
     container_name: homeassistant
     network_mode: host
     environment:
