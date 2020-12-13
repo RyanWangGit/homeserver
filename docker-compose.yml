@@ -84,6 +84,8 @@ services:
     image: ghcr.io/linuxserver/transmission
     network_mode: host
     container_name: transmission
+    depends_on: 
+      - pihole  # needs pihole to resolve DNS queries to get tracker address
     volumes:
       - /config/transmission:/config
       - /mnt/usb/media:/downloads
@@ -103,12 +105,14 @@ services:
       - TZ=America/New_York
     volumes:
       - /config/nginx:/config
-      - /config/minecraft/plugins/BlueMap/web:/bluemap:ro # for bluemap
+      - /config/minecraft/plugins/BlueMap/web:/bluemap:ro  # for bluemap
     restart: unless-stopped
 
   duplicati:
     image: ghcr.io/linuxserver/duplicati
     container_name: duplicati
+    depends_on: 
+      - pihole  # needs pihole to resolve DNS queries for external drives (e.g., google drive)
     environment:
       - PUID=1000
       - PGID=1000
