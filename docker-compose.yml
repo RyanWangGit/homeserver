@@ -1,5 +1,40 @@
 version: "3"
 services:
+  # unbound & pihole for providing DNS services
+  unbound: # 127.0.0.1:5335/udp
+    build: ./unbound
+    network_mode: host
+    container_name: unbound
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config/unbound:/config
+    restart: unless-stopped
+  
+  pihole: # *:53 127.0.0.1:5000
+    container_name: pihole
+    # official pihole docker lacks PUID and PGID
+    # track https://github.com/pi-hole/docker-pi-hole/issues/328 for news
+    # so we apply various patches to the official pihole image to make some customizations
+    # so that the config files' permissions are not messed up and setupvars won't be overriden 
+    # everytime the container restarts
+    build: ./pihole
+    depends_on: unbound
+    network_mode: host
+    environment:
+      - TZ='America/New_York'
+      - WEB_PORT=5000
+      - ServerIP=127.0.0.1
+      - DNSMASQ_LISTENING=enp12s0
+      - INTERFACE=enp12s0
+      - DNSMASQ_USER=pihole
+    volumes:
+      - /config/pihole/pihole:/etc/pihole/
+      - /config/pihole/dnsmasq:/etc/dnsmasq.d/
+    restart: unless-stopped
+
   minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
     build: ./minecraft
     network_mode: host
@@ -113,35 +148,3 @@ services:
       - /dev/dri:/dev/dri
     restart: unless-stopped
   
-  unbound: # 127.0.0.1:5335/udp
-    build: ./unbound
-    network_mode: host
-    container_name: unbound
-    environment:
-      - TZ=America/New_York
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /config/unbound:/config
-    restart: unless-stopped
-  
-  pihole: # *:53 127.0.0.1:5000
-    container_name: pihole
-    # official pihole docker lacks PUID and PGID
-    # track https://github.com/pi-hole/docker-pi-hole/issues/328 for news
-    # so we apply various patches to the official pihole image to make some customizations
-    # so that the config files' permissions are not messed up and setupvars won't be overriden 
-    # everytime the container restarts
-    build: ./pihole
-    network_mode: host
-    environment:
-      - TZ='America/New_York'
-      - WEB_PORT=5000
-      - ServerIP=127.0.0.1
-      - DNSMASQ_LISTENING=enp12s0
-      - INTERFACE=enp12s0
-      - DNSMASQ_USER=pihole
-    volumes:
-      - /config/pihole/pihole:/etc/pihole/
-      - /config/pihole/dnsmasq:/etc/dnsmasq.d/
-    restart: unless-stopped
