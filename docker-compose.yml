@@ -36,13 +36,15 @@ services:
       - /config/pihole/dnsmasq:/etc/dnsmasq.d/
     restart: unless-stopped
 
+  # minecraft server (PaperMC) with plugins
   minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
     build: ./minecraft
     network_mode: host
     container_name: minecraft
+    depends_on: 
+      - pihole  # needs pihole to resolve DNS to download papermc.
     volumes:
       - /config/minecraft:/config
-      - /dynmap_data:/dynmap_data
     environment:
       - EULA=true
       - PUID=1000
