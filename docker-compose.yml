@@ -21,7 +21,8 @@ services:
     # so that the config files' permissions are not messed up and setupvars won't be overriden 
     # everytime the container restarts
     build: ./pihole
-    depends_on: unbound
+    depends_on: 
+      - unbound
     network_mode: host
     environment:
       - TZ='America/New_York'
