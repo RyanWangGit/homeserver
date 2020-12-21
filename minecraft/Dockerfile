@@ -20,8 +20,8 @@ RUN wget https://gist.githubusercontent.com/yxwangcs/b82abf7424d02b384e4e5ee5985
 
 # install the plugins
 RUN mkdir /plugins
-RUN ESSENTIALSX_JAR=`curl -s https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/ | grep -o "EssentialsX-[0-9.]*\.jar" | head -n1` && \
-    wget "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/${ESSENTIALSX_JAR}" \
+RUN ESSENTIALSX_JAR=`curl -s https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/ | pcregrep -o "EssentialsX-[0-9.]*[\w-+]*\.jar" | head -n1` && \
+    wget "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/${ESSENTIALSX_JAR}" \
     -O "/plugins/${ESSENTIALSX_JAR}"
 
 # mcMMO
