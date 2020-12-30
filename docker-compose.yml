@@ -148,8 +148,9 @@ services:
       - PGID=1000
     volumes:
       - /config/jellyfin:/config
-      - /mnt/usb/media/tvshows:/data/tvshows:ro
-      - /mnt/usb/media/movies:/data/movies:ro
+      - /mnt/usb/media/tvshows:/data/tvshows
+      - /mnt/usb/media/movies:/data/movies
+      - /mnt/usb/media/anime:/data/anime
       - /transcode:/transcode
     devices:
       - /dev/dri:/dev/dri
