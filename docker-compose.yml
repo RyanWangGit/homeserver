@@ -58,6 +58,7 @@ services:
     volumes:
       - /config/samba:/config
       - /mnt/usb/media:/share:ro
+      - /mnt/usb/media/books:/writable-books
       - /mnt/usb/temp:/temp
     environment:
       - PUID=1000
@@ -139,7 +140,7 @@ services:
     restart: unless-stopped
 
   jellyfin: # 127.0.0.1:8096/tcp
-    image: ghcr.io/linuxserver/jellyfin
+    image: ghcr.io/linuxserver/jellyfin:nightly
     network_mode: host
     container_name: jellyfin
     environment:
@@ -151,6 +152,7 @@ services:
       - /mnt/usb/media/tvshows:/data/tvshows
       - /mnt/usb/media/movies:/data/movies
       - /mnt/usb/media/anime:/data/anime
+      - /mnt/usb/media/books:/data/books:ro
       - /transcode:/transcode
     devices:
       - /dev/dri:/dev/dri
