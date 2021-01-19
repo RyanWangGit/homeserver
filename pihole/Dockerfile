@@ -1,3 +1,3 @@
-FROM pihole/pihole:v5.3.4
+FROM pihole/pihole:v5.4
 
 COPY ./patches/ /etc/cont-init.d/
