@@ -1,4 +1,4 @@
-FROM alpine:3.12 AS builder
+FROM alpine:3.13 AS builder
 
 RUN apk add --no-cache \
     build-base \
@@ -28,7 +28,7 @@ RUN rm -rf /tmp/* /opt/*/include /opt/*/man /opt/*/share \
     && strip /opt/unbound/sbin/unbound
 
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.13
 
 COPY --from=builder /opt /opt
 
