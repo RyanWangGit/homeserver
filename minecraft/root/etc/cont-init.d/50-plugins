@@ -6,19 +6,7 @@ mkdir -p /config
 # copy the compiled plugins to config folder
 mkdir -p /config/plugins
 
-# remove older plugins
-rm -f /config/plugins/EssentialsX-*.jar
-rm -f /config/plugins/mcMMO*.jar
-rm -f /config/plugins/worldedit-bukkit*.jar
-rm -f /config/plugins/ViaVersion*.jar
-rm -f /config/plugins/ViaBackwards*.jar
-rm -f /config/plugins/BlueMap*.jar
-
-# copy compiled plugins
-cp /plugins/*.jar /config/plugins/
+python3 /jar_updater.py /minecraft /config/plugins
 
 # create world folder if not present
 mkdir -p /config/world
-
-# set correct owner
-chown -R abc:abc /config
