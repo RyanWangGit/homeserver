@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-echo "Searching for smpasswd file in config folder";
-
-if [ ! -f /config/passdb.tdb ]; then
-    echo "Password database file not found, try manually setting password using smbpasswd";
-fi
-
-ln -s /config/passdb.tdb /var/lib/samba/private/passdb.tdb;
