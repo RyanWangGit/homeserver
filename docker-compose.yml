@@ -98,6 +98,22 @@ services:
       - PGID=1000
     restart: unless-stopped
 
+  qbittorrent:
+    image: ghcr.io/linuxserver/qbittorrent
+    network_mode: host
+    container_name: qbittorrent
+    depends_on: 
+      - pihole  # needs pihole to resolve DNS queries to get tracker address
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - WEBUI_PORT=8080
+    volumes:
+      - /config/qbittorrent:/config
+      - /mnt/usb/media:/downloads
+    restart: unless-stopped
+
   nginx: # reverse proxy
     build: ./nginx
     network_mode: host
