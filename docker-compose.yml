@@ -170,6 +170,7 @@ services:
       - /mnt/usb/media/tvshows:/data/tvshows
       - /mnt/usb/media/movies:/data/movies
       - /mnt/usb/media/anime:/data/anime
+      - /mnt/usb/media/music:/data/music
       - /mnt/usb/media/books:/data/books:ro
       - /transcode:/transcode
     devices:
