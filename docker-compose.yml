@@ -165,6 +165,8 @@ services:
       - TZ=America/New_York
       - PUID=1000
       - PGID=1000
+    tmpfs:
+      - /tmp
     volumes:
       - /config/jellyfin:/config
       - /mnt/usb/media/tvshows:/data/tvshows
