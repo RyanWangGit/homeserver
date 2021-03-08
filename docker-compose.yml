@@ -158,7 +158,7 @@ services:
     restart: unless-stopped
 
   jellyfin: # 127.0.0.1:8096/tcp
-    image: ghcr.io/linuxserver/jellyfin:nightly
+    image: ghcr.io/linuxserver/jellyfin
     network_mode: host
     container_name: jellyfin
     environment:
