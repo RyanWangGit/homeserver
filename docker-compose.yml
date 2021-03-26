@@ -83,21 +83,6 @@ services:
       - /config/avahi/services:/etc/avahi/services:ro
     restart: unless-stopped
 
-  transmission: # 127.0.0.1:9091 *:51413
-    image: ghcr.io/linuxserver/transmission
-    network_mode: host
-    container_name: transmission
-    depends_on: 
-      - pihole  # needs pihole to resolve DNS queries to get tracker address
-    volumes:
-      - /config/transmission:/config
-      - /mnt/usb/media:/downloads
-    environment:
-      - TZ=America/New_York
-      - PUID=1000
-      - PGID=1000
-    restart: unless-stopped
-
   qbittorrent:
     image: ghcr.io/linuxserver/qbittorrent
     network_mode: host
