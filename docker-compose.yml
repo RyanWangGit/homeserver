@@ -129,7 +129,7 @@ services:
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
-    image: homeassistant/home-assistant:2021.2.3
+    image: homeassistant/home-assistant:2021.3.2
     container_name: homeassistant
     network_mode: host
     environment:
