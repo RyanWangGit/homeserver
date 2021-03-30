@@ -62,6 +62,7 @@ def mcmmo(file: Path, version):
 
     script = f"""
     cd {file.parent.resolve()}
+    rm -rf mcmmo-src
     git clone https://github.com/mcMMO-Dev/mcMMO.git mcmmo-src
     cd mcmmo-src
     mvn clean package install
