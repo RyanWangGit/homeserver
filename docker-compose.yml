@@ -129,17 +129,15 @@ services:
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
-    image: homeassistant/home-assistant:2021.3.2
+    image: ghcr.io/linuxserver/homeassistant
     container_name: homeassistant
     network_mode: host
     environment:
       - TZ=America/New_York
       - PUID=1000
       - PGID=1000
-      - PACKAGES=iputils
     volumes:
       - /config/homeassistant:/config
-      - /config/homeassistant/docker/run:/etc/services.d/home-assistant/run:ro
     restart: unless-stopped
 
   jellyfin: # 127.0.0.1:8096/tcp
