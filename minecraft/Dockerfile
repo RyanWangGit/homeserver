@@ -17,7 +17,7 @@ RUN apk add --no-cache make gcc g++ python3-dev \
     && apk del make gcc g++ python3-dev 
 
 # install openjdk
-RUN apk add --no-cache openjdk15 maven --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
+RUN apk add --no-cache openjdk16 maven --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN apk add git
 
 COPY root/ /
