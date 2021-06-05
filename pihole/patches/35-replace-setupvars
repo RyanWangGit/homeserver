@@ -1,5 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-if [ -f /tmp/setupVars.conf ]; then
-    cp -p /tmp/setupVars.conf /etc/pihole/setupVars.conf
-fi

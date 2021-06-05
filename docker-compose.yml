@@ -1,6 +1,6 @@
 version: "3"
 services:
-  # unbound & pihole for providing DNS services
+  # unbound & adguard for providing DNS services
   unbound: # 127.0.0.1:5335/udp
     build: ./unbound
     network_mode: host
@@ -13,30 +13,16 @@ services:
       - /config/unbound:/config
     restart: unless-stopped
   
-  pihole: # *:53 127.0.0.1:5000
-    container_name: pihole
-    # official pihole docker lacks PUID and PGID
-    # track https://github.com/pi-hole/docker-pi-hole/issues/328 for news
-    # so we apply various patches to the official pihole image to make some customizations
-    # so that the config files' permissions are not messed up and setupvars won't be overriden 
-    # everytime the container restarts
-    build: ./pihole
+  adguard: # *:53 127.0.0.1:5000
+    container_name: adguard
+    image: adguard/adguardhome
     depends_on: 
       - unbound
     network_mode: host
-    environment:
-      - TZ='America/New_York'
-      - WEB_PORT=5000
-      - ServerIP=127.0.0.1
-      - DNSMASQ_LISTENING=enp3s0
-      - INTERFACE=enp3s0
-      - DNSMASQ_USER=pihole
     volumes:
-      - /config/pihole/pihole:/etc/pihole/
-      - /config/pihole/dnsmasq:/etc/dnsmasq.d/
+      - /config/adguard/work:/opt/adguardhome/work
+      - /config/adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
-    dns:
-      - 1.1.1.1
 
   # minecraft server (PaperMC) with plugins
   minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
@@ -44,7 +30,7 @@ services:
     network_mode: host
     container_name: minecraft
     depends_on: 
-      - pihole  # needs pihole to resolve DNS to download papermc.
+      - adguard  # needs adguard to resolve DNS to download papermc.
     volumes:
       - /config/minecraft:/config
     environment:
@@ -88,7 +74,7 @@ services:
     network_mode: host
     container_name: qbittorrent
     depends_on: 
-      - pihole  # needs pihole to resolve DNS queries to get tracker address
+      - adguard  # needs adguard to resolve DNS queries to get tracker address
     environment:
       - PUID=1000
       - PGID=1000
@@ -116,7 +102,7 @@ services:
     image: ghcr.io/linuxserver/duplicati
     container_name: duplicati
     depends_on: 
-      - pihole  # needs pihole to resolve DNS queries for external drives (e.g., google drive)
+      - adguard  # needs adguard to resolve DNS queries for external drives (e.g., google drive)
     environment:
       - PUID=1000
       - PGID=1000
@@ -166,7 +152,7 @@ services:
     image: ghcr.io/linuxserver/wireguard
     container_name: wireguard
     depends_on: 
-      - pihole  # needs pihole to resolve DNS queries for the peers
+      - adguard  # needs adguard to resolve DNS queries for the peers
     cap_add:
       - NET_ADMIN
       - SYS_MODULE

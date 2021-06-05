@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-sed -i 's/cache-size=.*/cache-size=0/g' /etc/dnsmasq.d/01-pihole.conf
