@@ -23,6 +23,30 @@ services:
       - /config/adguard/work:/opt/adguardhome/work
       - /config/adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
+  
+  nginx: # reverse proxy
+    build: ./nginx
+    network_mode: host
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/nginx:/config
+      - /config/minecraft/plugins/BlueMap/web:/bluemap:ro  # for bluemap
+    restart: unless-stopped
+
+  vaultwarden: 
+    container_name: vaultwarden
+    image: vaultwarden/server
+    depends_on:
+      - adguard # needs adguard to resolve DNS for the service
+      - nginx # 
+    volumes:
+      - /config/vaultwarden:/data
+    ports:
+      - 127.0.0.1:7777:80
 
   # minecraft server (PaperMC) with plugins
   minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
@@ -75,6 +99,7 @@ services:
     container_name: qbittorrent
     depends_on: 
       - adguard  # needs adguard to resolve DNS queries to get tracker address
+      - nginx # needs nginx to reverse proxy
     environment:
       - PUID=1000
       - PGID=1000
@@ -85,37 +110,28 @@ services:
       - /mnt/usb/media:/downloads
     restart: unless-stopped
 
-  nginx: # reverse proxy
-    build: ./nginx
-    network_mode: host
-    container_name: nginx
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-    volumes:
-      - /config/nginx:/config
-      - /config/minecraft/plugins/BlueMap/web:/bluemap:ro  # for bluemap
-    restart: unless-stopped
-
   duplicati:
     image: ghcr.io/linuxserver/duplicati
     container_name: duplicati
     depends_on: 
       - adguard  # needs adguard to resolve DNS queries for external drives (e.g., google drive)
+      - nginx # needs nginx to reverse proxy
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
     volumes:
       - /config/duplicati:/config
-      - /config:/source
+      - /config:/source:ro
     ports:
       - 127.0.0.1:8200:8200
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
     image: ghcr.io/linuxserver/homeassistant
+    depends_on: 
+      - adguard  # needs adguard to resolve DNS queries for the service
+      - nginx # needs nginx to reverse proxy
     container_name: homeassistant
     network_mode: host
     environment:
@@ -128,6 +144,9 @@ services:
 
   jellyfin: # 127.0.0.1:8096/tcp
     image: ghcr.io/linuxserver/jellyfin
+    depends_on: 
+      - adguard  # needs adguard to resolve DNS queries for the service
+      - nginx # needs nginx to reverse proxy
     network_mode: host
     container_name: jellyfin
     environment:
