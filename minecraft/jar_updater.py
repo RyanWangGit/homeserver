@@ -167,7 +167,7 @@ def mcmanager(file: Path, version):
 def papermc(file, version):
     # get latest papermc version
     body = json.loads(requests.get('https://papermc.io/api/v2/projects/paper').content)
-    latest_version = body['versions'][-1]
+    latest_version = '1.16.5' #body['versions'][-1]
     body = json.loads(requests.get(f'https://papermc.io/api/v2/projects/paper/versions/{latest_version}').content)
     latest_build = body['builds'][-1]
     body = json.loads(
