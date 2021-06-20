@@ -49,6 +49,7 @@ services:
     ports:
       - 127.0.0.1:3012:3012
       - 127.0.0.1:7777:80
+    restart: unless-stopped
 
   # minecraft server (PaperMC) with plugins
   minecraft: # *:25565/tcp 127.0.0.1:25564/tcp 127.0.0.1:9999/tcp
