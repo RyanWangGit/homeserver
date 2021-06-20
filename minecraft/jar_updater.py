@@ -128,9 +128,9 @@ def viaversion(file: Path, version):
     return updater_by_re(
         file,
         version,
-        'https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target/',
+        'https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/build/libs/',
         r'ViaVersion-[0-9.]*-\w*.jar',
-        'https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/jar/target',
+        'https://ci.viaversion.com/job/ViaVersion/lastSuccessfulBuild/artifact/build/libs',
         'viaversion'
     )
 
@@ -139,9 +139,9 @@ def viabackwards(file: Path, version):
     return updater_by_re(
         file,
         version,
-        'https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target/',
+        'https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/build/libs/',
         r'ViaBackwards-[0-9.]*(-\w*)?.jar',
-        'https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/all/target',
+        'https://ci.viaversion.com/view/ViaBackwards/job/ViaBackwards/lastSuccessfulBuild/artifact/build/libs',
         'viabackwards'
     )
 
