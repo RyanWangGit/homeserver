@@ -172,6 +172,7 @@ services:
   wireguard:
     image: ghcr.io/linuxserver/wireguard
     container_name: wireguard
+    network_mode: host
     depends_on: 
       - adguard  # needs adguard to resolve DNS queries for the peers
     cap_add:
@@ -184,9 +185,5 @@ services:
     volumes:
       - /config/wireguard:/config
       - /lib/modules:/lib/modules
-    ports:
-      - 51820:51820/udp
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
   
