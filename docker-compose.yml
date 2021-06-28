@@ -157,7 +157,7 @@ services:
       - PUID=1000
       - PGID=1000
     tmpfs:
-      - /tmp
+      - /transcode
     volumes:
       - /config/jellyfin:/config
       - /mnt/usb/media/tvshows:/data/tvshows
@@ -165,7 +165,6 @@ services:
       - /mnt/usb/media/anime:/data/anime
       - /mnt/usb/media/music:/data/music
       - /mnt/usb/media/books:/data/books:ro
-      - /transcode:/transcode
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
