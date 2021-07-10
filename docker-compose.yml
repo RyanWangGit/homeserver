@@ -158,6 +158,7 @@ services:
       - PGID=1000
     tmpfs:
       - /transcode
+      - /cache
     volumes:
       - /config/jellyfin:/config
       - /mnt/usb/media/tvshows:/data/tvshows
