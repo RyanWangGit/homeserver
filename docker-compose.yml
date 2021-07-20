@@ -19,8 +19,9 @@ services:
     depends_on: 
       - unbound
     network_mode: host
+    tmpfs:
+      - /opt/adguardhome/work
     volumes:
-      - /config/adguard/work:/opt/adguardhome/work
       - /config/adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
   
@@ -131,7 +132,7 @@ services:
     restart: unless-stopped
 
   homeassistant: # 127.0.0.1:9999/tcp *:5353/udp *:51827/tcp
-    image: ghcr.io/linuxserver/homeassistant:version-2021.7.1
+    image: ghcr.io/linuxserver/homeassistant:version-2021.7.3
     depends_on: 
       - adguard  # needs adguard to resolve DNS queries for the service
       - nginx # needs nginx to reverse proxy
